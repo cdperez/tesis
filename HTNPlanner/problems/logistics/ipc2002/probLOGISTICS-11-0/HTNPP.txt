@@ -1,0 +1,49 @@
+:method obj-at
+:method in-city-delivery
+:method obj-at
+:method in-city-delivery
+:method truck-at
+!add-protection((truck-at truck=truck3 loc-now=loc3))
+!load_truck(package33,truck3,loc3)
+:method truck-at
+!drive-truck(truck3,loc3,air3)
+!unload_truck(package33,truck3,air3)
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method in-city-delivery
+:method truck-at
+!add-protection((truck-at truck=truck2 loc-now=loc2))
+!load_truck(package22,truck2,loc2)
+:method truck-at
+!drive-truck(truck2,loc2,air2)
+!unload_truck(package22,truck2,air2)
+:method obj-at
+:method in-city-delivery
+:method truck-at
+!add-protection((truck-at truck=truck1 loc-now=loc1))
+!load_truck(package12,truck1,loc1)
+:method truck-at
+!drive-truck(truck1,loc1,air1)
+!unload_truck(package12,truck1,air1)
+:method obj-at
+:method obj-at
+:method in-city-delivery
+:method obj-at
+
+[1] !add-protection((truck-at truck=truck3 loc-now=loc3))
+[2] !load_truck(package33,truck3,loc3)
+[3] !drive-truck(truck3,loc3,air3)
+[4] !unload_truck(package33,truck3,air3)
+[5] !add-protection((truck-at truck=truck2 loc-now=loc2))
+[6] !load_truck(package22,truck2,loc2)
+[7] !drive-truck(truck2,loc2,air2)
+[8] !unload_truck(package22,truck2,air2)
+[9] !add-protection((truck-at truck=truck1 loc-now=loc1))
+[10] !load_truck(package12,truck1,loc1)
+[11] !drive-truck(truck1,loc1,air1)
+[12] !unload_truck(package12,truck1,air1)
+
+
+Tardó 50ms

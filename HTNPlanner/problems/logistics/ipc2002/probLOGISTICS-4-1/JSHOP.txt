@@ -1,0 +1,34 @@
+[Plan cost: 28.0
+
+(!add-protection (truck-at truck1 loc1))
+(!load-truck package12 truck1 loc1)
+(!drive-truck truck1 loc1 air1)
+(!unload-truck package12 truck1 air1)
+(!fly-airplane plane1 air2 air1)
+(!load-airplane package12 plane1 air1)
+(!fly-airplane plane1 air1 air2)
+(!unload-airplane package12 plane1 air2)
+(!drive-truck truck1 air1 loc1)
+(!load-truck package13 truck1 loc1)
+(!drive-truck truck1 loc1 air1)
+(!unload-truck package13 truck1 air1)
+(!add-protection (truck-at truck2 loc2))
+(!load-truck package21 truck2 loc2)
+(!drive-truck truck2 loc2 air2)
+(!unload-truck package21 truck2 air2)
+(!drive-truck truck1 air1 loc1)
+(!load-truck package11 truck1 loc1)
+(!drive-truck truck1 loc1 air1)
+(!unload-truck package11 truck1 air1)
+(!fly-airplane plane1 air2 air1)
+(!load-airplane package11 plane1 air1)
+(!fly-airplane plane1 air1 air2)
+(!unload-airplane package11 plane1 air2)
+(!add-protection (truck-at truck2 air2))
+(!load-truck package11 truck2 air2)
+(!drive-truck truck2 air2 loc2)
+(!unload-truck package11 truck2 loc2)
+--------------------
+]
+
+Tardó 521ms

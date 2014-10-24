@@ -1,0 +1,20 @@
+:method obj-at
+:method obj-at
+:method obj-at
+:method in-city-delivery
+:method truck-at
+!add-protection((truck-at truck=truck2 loc-now=loc2))
+!load_truck(package23,truck2,loc2)
+:method truck-at
+!drive-truck(truck2,loc2,air2)
+!unload_truck(package23,truck2,air2)
+:method obj-at
+:method in-city-delivery
+
+[1] !add-protection((truck-at truck=truck2 loc-now=loc2))
+[2] !load_truck(package23,truck2,loc2)
+[3] !drive-truck(truck2,loc2,air2)
+[4] !unload_truck(package23,truck2,air2)
+
+
+Tardó 45ms

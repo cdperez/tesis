@@ -1,0 +1,47 @@
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method in-city-delivery
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method in-city-delivery
+:method truck-at
+!add-protection((truck-at truck=truck5 loc-now=loc5))
+!load_truck(package52,truck5,loc5)
+:method truck-at
+!drive-truck(truck5,loc5,air5)
+!unload_truck(package52,truck5,air5)
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method in-city-delivery
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+:method obj-at
+
+[1] !add-protection((truck-at truck=truck5 loc-now=loc5))
+[2] !load_truck(package52,truck5,loc5)
+[3] !drive-truck(truck5,loc5,air5)
+[4] !unload_truck(package52,truck5,air5)
+
+
+Tardó 62ms

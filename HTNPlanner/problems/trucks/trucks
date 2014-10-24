@@ -1,0 +1,77 @@
+(defdomain trucks(
+			   
+	(:operator (!load ?p ?t ?a1 ?l)
+		()
+		;;((at ?p ?l) (free ?a1 ?t) (:protection(at ?t ?l)))
+		((at ?p ?l) (free ?a1 ?t))
+		((in ?p ?t ?a1))
+		)
+		
+	(:operator (!unload ?p ?t ?a1 ?l)
+		()
+		;;((in ?p ?t ?a1) (:protection(at ?t ?l)))
+		((in ?p ?t ?a1))
+		((free ?a1 ?t) (at ?p ?l))
+		)
+		
+	(:operator (!drive ?t ?from ?to ?t1 ?t2)
+		()
+		((at ?t ?from) (time-now ?t1))
+		;;((time-now ?t2)(at ?t ?to) (:protection(at ?t ?to)))
+		((time-now ?t2)(at ?t ?to))
+		)
+
+	(:operator (!deliver ?p ?l ?t1 ?t2)
+		()
+		((at ?p ?l))
+		((delivered ?p ?l ?t2) (at-destination ?p ?l))
+		)
+		
+	(:method (at-destination ?p ?l)
+		
+		((at-destination ?p ?l))
+		()
+		
+		((at ?p ?l))
+		((do-deliver ?p ?l))
+		
+		((at ?p ?from))
+		((transport-package ?p ?from ?l) (at-destination ?p ?l))
+		)
+		
+	(:method (transport-package ?p ?from ?to)
+		
+		((at(?p ?to)))
+		()
+		
+		;;((at ?p ?from) (at ?t ?from) (free ?a1 ?t) (forall (?a2) (closer ?a2 ?a1) (free ?a2 ?t)))
+		((at ?t ?from) (free ?a1 ?t))
+		((do-transportation ?p ?t ?a1 ?from ?to))
+		
+		;;((at ?t ?l1) (free ?a1 ?t) (forall (?a2) (closer ?a2 ?a1) (free ?a2 ?t)))
+		((at ?t ?l1) (free ?a1 ?t))
+		((do-drive ?t ?l1 ?from) (do-transportation ?p ?t ?a1 ?from ?to))
+		)
+		
+	(:method (do-transportation ?p ?t ?a ?from ?to)
+	
+		()
+		((!load ?p ?t ?a ?from) (do-drive ?t ?from ?to) (!unload ?p ?t ?a ?to))
+		)
+		
+	(:method (do-drive ?t ?from ?to)
+	
+		((at ?t ?to))
+		()
+		
+		((at ?t ?from) (connected ?from ?to) (time-now ?t1) (next ?t1 ?t2))
+		((!drive ?t ?from ?to ?t1 ?t2))
+		)
+		
+	(:method (do-deliver ?p ?l)
+	
+		((at ?p ?l) (time-now ?t1) (next ?t1 ?t2))
+		((!deliver ?p ?l ?t1 ?t2))
+		)
+		
+))

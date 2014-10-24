@@ -1,0 +1,18 @@
+[Plan cost: 12.0
+
+(!add-protection (truck-at truck2 loc2))
+(!load-truck package21 truck2 loc2)
+(!drive-truck truck2 loc2 air2)
+(!unload-truck package21 truck2 air2)
+(!add-protection (truck-at truck1 loc1))
+(!load-truck package12 truck1 loc1)
+(!drive-truck truck1 loc1 air1)
+(!unload-truck package12 truck1 air1)
+(!drive-truck truck2 air2 loc2)
+(!load-truck package23 truck2 loc2)
+(!drive-truck truck2 loc2 air2)
+(!unload-truck package23 truck2 air2)
+--------------------
+]
+
+Tardó 530ms
