@@ -17,7 +17,6 @@ public class TrucksParser extends Parser {
 			domain.at_destination(list.get(0).toString(),list.get(1).toString());
 		}
 		
-		System.out.println("entra");
-		System.out.println(domain);
+		System.out.println(domain.toString());
 	}
 }

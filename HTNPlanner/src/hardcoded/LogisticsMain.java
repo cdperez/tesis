@@ -27,7 +27,7 @@ public class LogisticsMain {
 	    problem.problem();
 	    tiempo=System.currentTimeMillis()-tiempo;
 		System.out.println();
-		System.out.println("Tard� "+tiempo+"ms");
+		System.out.println("Tardo "+tiempo+"ms");
 		}
 	
 	private static JSHOP2Parser getParser(String problemID) throws Exception {

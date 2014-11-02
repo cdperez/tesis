@@ -12,12 +12,13 @@ public class TrucksMain {
 	  {
 		
 		JSHOP2Parser problem = getParser("/trucks/problem02");
-				
+//		JSHOP2Parser problem = getParser("/trucks/problem20");
+		
 		long tiempo = System.currentTimeMillis();
 		problem.problem();
 		tiempo=System.currentTimeMillis()-tiempo;
 		System.out.println();
-		System.out.println("Tard� "+tiempo+"ms");
+		System.out.println("Tardo "+tiempo+"ms");
 	  }
 	
 	private static JSHOP2Parser getParser(String problemID) throws Exception {
