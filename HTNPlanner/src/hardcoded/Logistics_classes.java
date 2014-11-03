@@ -24,41 +24,36 @@ import antlr.generated.JSHOP2Parser;
 public class Logistics_classes {
 	
 	public static void main(String[] args){
+		long tiempo = System.currentTimeMillis();
+		
 		loadDomain();
 		try{
+//			loadDomainPosta();
 			loadProblem();
 		}
 		 catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		long tiempo = System.currentTimeMillis();
 		
-		System.out.println(Domain.invoke("obj-at", new Variable("obj","package1"), new Variable("loc-goal","loc8-1")));
-		System.out.println(Domain.invoke("obj-at", new Variable("obj","package2"), new Variable("loc-goal","loc2-1")));
-		System.out.println(Domain.invoke("obj-at", new Variable("obj","package3"), new Variable("loc-goal","loc2-3")));
-		System.out.println(Domain.invoke("obj-at", new Variable("obj","package4"), new Variable("loc-goal","loc6-2")));
-		System.out.println(Domain.invoke("obj-at", new Variable("obj","package5"), new Variable("loc-goal","loc1-1")));
 		
 		tiempo=System.currentTimeMillis()-tiempo;
-		
-		
-		//System.out.println(Domain.invoke("obj-at", new Variable("obj","package6"), new Variable("loc-goal","loc6-2")));
-		//System.out.println(Domain.invoke("obj-at", new Variable("obj","package7"), new Variable("loc-goal","loc6-3")));
-		//System.out.println(Domain.invoke("obj-at", new Variable("obj","package8"), new Variable("loc-goal","loc1-1")));
-		//System.out.println(Domain.invoke("obj-at", new Variable("obj","package9"), new Variable("loc-goal","loc4-2")));
-		//System.out.println(Domain.invoke("obj-at", new Variable("obj","package10"), new Variable("loc-goal","loc8-3")));
-		
-		//System.out.println(Domain.invoke("obj-at", new Variable("obj","package11"), new Variable("loc-goal","loc3-2")));
-		//System.out.println(Domain.invoke("obj-at", new Variable("obj","package12"), new Variable("loc-goal","loc3-3")));
-		//System.out.println(Domain.invoke("obj-at", new Variable("obj","package13"), new Variable("loc-goal","loc3-2")));
-		//System.out.println(Domain.invoke("obj-at", new Variable("obj","package14"), new Variable("loc-goal","loc6-3")));
-		//System.out.println(Domain.invoke("obj-at", new Variable("obj","package15"), new Variable("loc-goal","loc5-1")));
 		
 		System.out.println(Plan.toStringg());
 		
 		System.out.println();
 		System.out.println("Tardó "+tiempo+"ms");
+	}
+	
+	private static void loadDomainPosta() throws IOException{
+		String domainFile = "./problems/logistics/logistics";
+		
+	    JSHOP2Lexer domainLexer = new JSHOP2Lexer(new ANTLRFileStream(domainFile));
+	    CommonTokenStream domainTokens = new CommonTokenStream(domainLexer);
+	    JSHOP2Parser domainParser = new JSHOP2Parser(domainTokens);
+	    domainParser.setBuildParseTree(true);
+	    domainParser.addParseListener(new Parser());
+	    domainParser.domain();
 	}
 	
 	private static void loadDomain(){
@@ -84,7 +79,7 @@ public class Logistics_classes {
 	}
 	
 	private static void loadProblem() throws IOException{
-		String problemFile = "./problems/logistics/problem";
+		String problemFile = "./problems/logistics/ipc2002/probLOGISTICS-30-1/problem";
 	    
 	    JSHOP2Lexer problemLexer = new JSHOP2Lexer(new ANTLRFileStream(problemFile));
 	    CommonTokenStream problemTokens = new CommonTokenStream(problemLexer);

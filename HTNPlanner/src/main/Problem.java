@@ -29,10 +29,9 @@ public class Problem {
 	
 	public static void delState(LogicalAtom atom){
 		LogicalAtom la = atom.asConstant();
-		if (protections.get(la).equals(0)){
+		
+		if (!isProtected(la))
 			state.remove(la.getName(), la);
-			protections.remove(la);
-		}
 	}
 	
 	public static void addState(String name, Term... terms){
@@ -45,11 +44,17 @@ public class Problem {
 	
 	public static void addProtection(LogicalAtom atom){
 		LogicalAtom la = atom.asConstant();
+		
+		if (!protections.containsKey(la))
+			protections.put(la, 0);
+		
 		protections.put(la, protections.get(la)+1);
 	}
 	
 	public static void delProtection(LogicalAtom atom){
 		LogicalAtom la = atom.asConstant();
+		if (!isProtected(la)) return;
+		
 		protections.put(la, protections.get(la)-1);
 	}
 	
@@ -59,6 +64,13 @@ public class Problem {
 	
 	public static void delProtection(String name, Term... terms){
 		Problem.delProtection(LogicalAtom.asLogicalAtom(name, terms));
+	}
+	
+	private static boolean isProtected(LogicalAtom la){
+		if (!protections.containsKey(la)) return false;
+		if (protections.get(la) <= 0) return false;
+		
+		return true;
 	}
 	
 	public static boolean isTrue(LogicalAtom la){

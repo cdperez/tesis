@@ -22,7 +22,8 @@ public class LogisticsMain {
 	  {
 		
 		JSHOP2Parser problem = getParser("ipc2002/probLOGISTICS-30-1/problem");
-				
+		
+		
 		long tiempo = System.currentTimeMillis();
 	    problem.problem();
 	    tiempo=System.currentTimeMillis()-tiempo;
@@ -38,14 +39,14 @@ public class LogisticsMain {
 	    CommonTokenStream domainTokens = new CommonTokenStream(domainLexer);
 	    JSHOP2Parser domainParser = new JSHOP2Parser(domainTokens);
 	    domainParser.setBuildParseTree(true);
-	    domainParser.addParseListener(new Parser());
+	    domainParser.addParseListener(new LogisticsParser());
 	    
 		
 	    JSHOP2Lexer problemLexer = new JSHOP2Lexer(new ANTLRFileStream(problemFile));
 	    CommonTokenStream problemTokens = new CommonTokenStream(problemLexer);
 	    JSHOP2Parser problemParser = new JSHOP2Parser(problemTokens);
 	    problemParser.setBuildParseTree(true);
-	    problemParser.addParseListener(new Parser());
+	    problemParser.addParseListener(new LogisticsParser());
 	    
 	    return problemParser;
 	}
@@ -132,45 +133,45 @@ public class LogisticsMain {
   			(obj-at package4 loc6-2)
   			(obj-at package5 loc1-1)
   			*/
-		System.out.println("(obj-at package1 loc8-1) is " + domain.obj_at("package1","loc8-1") +"\n");
-		System.out.println("(obj-at package2 loc2-1) is " + domain.obj_at("package2","loc2-1") +"\n");
-		System.out.println("(obj-at package3 loc2-3) is " + domain.obj_at("package3","loc2-3") +"\n");
-		System.out.println("(obj-at package4 loc6-2) is " + domain.obj_at("package4","loc6-2") +"\n");
-		System.out.println("(obj-at package5 loc1-1) is " + domain.obj_at("package5","loc1-1") +"\n");
-		
-		/*
-  			(obj-at package6 loc6-2)
-  			(obj-at package7 loc6-3)
-  			(obj-at package8 loc1-1)
-  			(obj-at package9 loc4-2)
-  			(obj-at package10 loc8-3)
-  		*/
-		System.out.println("(obj-at package6 loc6-2) is " + domain.obj_at("package6","loc6-2") +"\n");
-		System.out.println("(obj-at package7 loc6-3) is " + domain.obj_at("package7","loc6-3") +"\n");
-		System.out.println("(obj-at package8 loc1-1) is " + domain.obj_at("package8","loc1-1") +"\n");
-		System.out.println("(obj-at package9 loc4-2) is " + domain.obj_at("package9","loc4-2") +"\n");
-		System.out.println("(obj-at package10 loc8-3) is " + domain.obj_at("package10","loc8-3") +"\n");
-  		
-		/*(obj-at package11 loc3-2)
-  			(obj-at package12 loc3-3)
-  			(obj-at package13 loc3-2)
-  			(obj-at package14 loc6-3)
-  			(obj-at package15 loc5-1)
-		 */
-		System.out.println("(obj-at package11 loc3-2) is " + domain.obj_at("package11","loc3-2") +"\n");
-		System.out.println("(obj-at package12 loc3-3) is " + domain.obj_at("package12","loc3-3") +"\n");
-		System.out.println("(obj-at package13 loc3-2) is " + domain.obj_at("package13","loc3-2") +"\n");
-		System.out.println("(obj-at package14 loc6-3) is " + domain.obj_at("package14","loc6-3") +"\n");
-		System.out.println("(obj-at package15 loc5-1) is " + domain.obj_at("package15","loc5-1") +"\n");
-		
-		tiempo=System.currentTimeMillis()-tiempo;
-		System.out.println();
-		System.out.println("Tard� "+tiempo+"ms");
-		System.out.println();
-		System.out.println("Plan: ");
-		System.out.println(domain);
-		System.out.println();
-		//System.out.println(Problem.debug());
+//		System.out.println("(obj-at package1 loc8-1) is " + domain.obj_at("package1","loc8-1") +"\n");
+//		System.out.println("(obj-at package2 loc2-1) is " + domain.obj_at("package2","loc2-1") +"\n");
+//		System.out.println("(obj-at package3 loc2-3) is " + domain.obj_at("package3","loc2-3") +"\n");
+//		System.out.println("(obj-at package4 loc6-2) is " + domain.obj_at("package4","loc6-2") +"\n");
+//		System.out.println("(obj-at package5 loc1-1) is " + domain.obj_at("package5","loc1-1") +"\n");
+//		
+//		/*
+//  			(obj-at package6 loc6-2)
+//  			(obj-at package7 loc6-3)
+//  			(obj-at package8 loc1-1)
+//  			(obj-at package9 loc4-2)
+//  			(obj-at package10 loc8-3)
+//  		*/
+//		System.out.println("(obj-at package6 loc6-2) is " + domain.obj_at("package6","loc6-2") +"\n");
+//		System.out.println("(obj-at package7 loc6-3) is " + domain.obj_at("package7","loc6-3") +"\n");
+//		System.out.println("(obj-at package8 loc1-1) is " + domain.obj_at("package8","loc1-1") +"\n");
+//		System.out.println("(obj-at package9 loc4-2) is " + domain.obj_at("package9","loc4-2") +"\n");
+//		System.out.println("(obj-at package10 loc8-3) is " + domain.obj_at("package10","loc8-3") +"\n");
+//  		
+//		/*(obj-at package11 loc3-2)
+//  			(obj-at package12 loc3-3)
+//  			(obj-at package13 loc3-2)
+//  			(obj-at package14 loc6-3)
+//  			(obj-at package15 loc5-1)
+//		 */
+//		System.out.println("(obj-at package11 loc3-2) is " + domain.obj_at("package11","loc3-2") +"\n");
+//		System.out.println("(obj-at package12 loc3-3) is " + domain.obj_at("package12","loc3-3") +"\n");
+//		System.out.println("(obj-at package13 loc3-2) is " + domain.obj_at("package13","loc3-2") +"\n");
+//		System.out.println("(obj-at package14 loc6-3) is " + domain.obj_at("package14","loc6-3") +"\n");
+//		System.out.println("(obj-at package15 loc5-1) is " + domain.obj_at("package15","loc5-1") +"\n");
+//		
+//		tiempo=System.currentTimeMillis()-tiempo;
+//		System.out.println();
+//		System.out.println("Tard� "+tiempo+"ms");
+//		System.out.println();
+//		System.out.println("Plan: ");
+//		System.out.println(domain);
+//		System.out.println();
+//		//System.out.println(Problem.debug());
 	}
 
 }

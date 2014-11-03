@@ -11,9 +11,9 @@ import terms.Variable;
 public class ClassesTest {
 	
 	public static void main(String[] args){
-		//operatorTest();
-		//methodTest();
-		binderTest();
+//		operatorTest();
+		methodTest();
+//		binderTest();
 	}
 	
 	public static void operatorTest(){
@@ -56,14 +56,17 @@ public class ClassesTest {
 	
 	public static void binderTest(){
 		Binder binder = new Binder();
-		binder.getBind(new Variable("a"));
+		Variable a = binder.getBind(new Variable("a"));
 		binder.getBind(new Variable("b"));
 		binder.getBind(new Variable("c"));
 		System.out.println(binder);
 		
-		Variable a = new Variable ("a");
-		a = binder.getBind(a);
+//		Variable a = new Variable ("a");
 		a.bind("a1");
+		System.out.println(a);
+		System.out.println(binder);
+		a = binder.getBind(new Variable("a"));
+		//a.bind("a1");
 		System.out.println(a);
 		System.out.println(binder);
 	}

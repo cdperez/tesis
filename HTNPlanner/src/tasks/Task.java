@@ -61,7 +61,9 @@ public abstract class Task {
 	public boolean invoke(Variable... params){
 		instantiate(params);
 		
-		if (!precondition.isTrue()) return false;
+		if (!precondition.isTrue()){
+			return false;
+		}
 		
 		return execute();
 	}

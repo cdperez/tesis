@@ -3,30 +3,18 @@
 package antlr.generated;
 	
 import java.util.Collection;
-import java.util.List;
+import preconditions.*;
+import terms.*;
+import tasks.*;
 
-import org.antlr.v4.runtime.FailedPredicateException;
-import org.antlr.v4.runtime.NoViableAltException;
-import org.antlr.v4.runtime.Parser;
-import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.RecognitionException;
-import org.antlr.v4.runtime.RuleContext;
-import org.antlr.v4.runtime.TokenStream;
-import org.antlr.v4.runtime.atn.ATN;
-import org.antlr.v4.runtime.atn.ATNDeserializer;
-import org.antlr.v4.runtime.atn.ParserATNSimulator;
-import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
-import org.antlr.v4.runtime.tree.ParseTreeListener;
-import org.antlr.v4.runtime.tree.TerminalNode;
-
-import preconditions.LogicalPrecondition;
-import tasks.Method;
-import tasks.Operator;
-import tasks.TaskInvoker;
-import terms.LogicalAtom;
-import terms.Term;
-import terms.Variable;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
+import org.antlr.v4.runtime.tree.*;
+import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class JSHOP2Parser extends Parser {
@@ -40,32 +28,32 @@ public class JSHOP2Parser extends Parser {
 		T__6=25, T__5=26, T__4=27, T__3=28, T__2=29, T__1=30, T__0=31, COMMENT=32, 
 		WS=33, NIL=34, SYMBOL=35, NUMBER=36;
 	public static final String[] tokenNames = {
-		"<INVALID>", "'Defdomain'", "':sort-by'", "'Defproblem'", "'-'", "'*'", 
-		"'not'", "'('", "'<'", "':method'", "'!='", "':unordered'", "':operator'", 
-		"':first'", "'<='", "'?'", "'defproblem'", "'and'", "'^'", "'.'", "')'", 
-		"':-'", "'+'", "'='", "'defdomain'", "':protection'", "'>'", "'call'", 
-		"':immediate'", "'/'", "'>='", "'!'", "COMMENT", "WS", "'nil'", "SYMBOL", 
+		"<INVALID>", "'/'", "':immediate'", "'!='", "':method'", "'='", "'^'", 
+		"'?'", "'call'", "'<='", "':first'", "'('", "':operator'", "'*'", "'.'", 
+		"'defdomain'", "'Defproblem'", "':-'", "':protection'", "':sort-by'", 
+		"'>='", "'<'", "'Defdomain'", "'>'", "'!'", "':unordered'", "'defproblem'", 
+		"')'", "'and'", "'+'", "'not'", "'-'", "COMMENT", "WS", "'nil'", "SYMBOL", 
 		"NUMBER"
 	};
 	public static final int
 		RULE_program = 0, RULE_domain = 1, RULE_item = 2, RULE_method = 3, RULE_operator = 4, 
-		RULE_protection_condition = 5, RULE_compound_task_atom = 6, RULE_primitive_task_atom = 7, 
-		RULE_task_list = 8, RULE_task_atom = 9, RULE_task = 10, RULE_axiom = 11, 
-		RULE_logical_precondition = 12, RULE_first_satisfier_pre = 13, RULE_sorted_pre = 14, 
-		RULE_logical_expression = 15, RULE_logical_atom = 16, RULE_terms = 17, 
+		RULE_compound_task_atom = 5, RULE_primitive_task_atom = 6, RULE_task_list = 7, 
+		RULE_task_atom = 8, RULE_task = 9, RULE_axiom = 10, RULE_logical_precondition = 11, 
+		RULE_first_satisfier_pre = 12, RULE_sorted_pre = 13, RULE_logical_expression = 14, 
+		RULE_logical_atom = 15, RULE_protection_condition = 16, RULE_terms = 17, 
 		RULE_term_list = 18, RULE_list_head = 19, RULE_term = 20, RULE_call_term = 21, 
 		RULE_variable = 22, RULE_primitive_task = 23, RULE_predicate = 24, RULE_compound_task = 25, 
 		RULE_java_function = 26, RULE_java_class = 27, RULE_name = 28, RULE_shop2_function = 29, 
 		RULE_shop2_comparator = 30, RULE_problem = 31, RULE_initial_state = 32, 
 		RULE_goals = 33;
 	public static final String[] ruleNames = {
-		"program", "domain", "item", "method", "operator", "protection_condition", 
-		"compound_task_atom", "primitive_task_atom", "task_list", "task_atom", 
-		"task", "axiom", "logical_precondition", "first_satisfier_pre", "sorted_pre", 
-		"logical_expression", "logical_atom", "terms", "term_list", "list_head", 
-		"term", "call_term", "variable", "primitive_task", "predicate", "compound_task", 
-		"java_function", "java_class", "name", "shop2_function", "shop2_comparator", 
-		"problem", "initial_state", "goals"
+		"program", "domain", "item", "method", "operator", "compound_task_atom", 
+		"primitive_task_atom", "task_list", "task_atom", "task", "axiom", "logical_precondition", 
+		"first_satisfier_pre", "sorted_pre", "logical_expression", "logical_atom", 
+		"protection_condition", "terms", "term_list", "list_head", "term", "call_term", 
+		"variable", "primitive_task", "predicate", "compound_task", "java_function", 
+		"java_class", "name", "shop2_function", "shop2_comparator", "problem", 
+		"initial_state", "goals"
 	};
 
 	@Override
@@ -88,11 +76,11 @@ public class JSHOP2Parser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class ProgramContext extends ParserRuleContext {
-		public DomainContext domain() {
-			return getRuleContext(DomainContext.class,0);
-		}
 		public ProblemContext problem() {
 			return getRuleContext(ProblemContext.class,0);
+		}
+		public DomainContext domain() {
+			return getRuleContext(DomainContext.class,0);
 		}
 		public ProgramContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -144,11 +132,11 @@ public class JSHOP2Parser extends Parser {
 		public ItemContext item(int i) {
 			return getRuleContext(ItemContext.class,i);
 		}
-		public List<ItemContext> item() {
-			return getRuleContexts(ItemContext.class);
-		}
 		public NameContext name() {
 			return getRuleContext(NameContext.class,0);
+		}
+		public List<ItemContext> item() {
+			return getRuleContexts(ItemContext.class);
 		}
 		public DomainContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -171,15 +159,15 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(72); match(7);
+			setState(72); match(11);
 			setState(73);
 			_la = _input.LA(1);
-			if ( !(_la==1 || _la==24) ) {
+			if ( !(_la==15 || _la==22) ) {
 			_errHandler.recoverInline(this);
 			}
 			consume();
 			setState(74); name();
-			setState(75); match(7);
+			setState(75); match(11);
 			setState(77); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -192,9 +180,9 @@ public class JSHOP2Parser extends Parser {
 				setState(79); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==7 );
-			setState(81); match(20);
-			setState(82); match(20);
+			} while ( _la==11 );
+			setState(81); match(27);
+			setState(82); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -209,14 +197,14 @@ public class JSHOP2Parser extends Parser {
 	}
 
 	public static class ItemContext extends ParserRuleContext {
-		public MethodContext method() {
-			return getRuleContext(MethodContext.class,0);
+		public AxiomContext axiom() {
+			return getRuleContext(AxiomContext.class,0);
 		}
 		public OperatorContext operator() {
 			return getRuleContext(OperatorContext.class,0);
 		}
-		public AxiomContext axiom() {
-			return getRuleContext(AxiomContext.class,0);
+		public MethodContext method() {
+			return getRuleContext(MethodContext.class,0);
 		}
 		public ItemContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -273,14 +261,8 @@ public class JSHOP2Parser extends Parser {
 
 	public static class MethodContext extends ParserRuleContext {
 		public Method _method;
-		public Task_listContext task_list(int i) {
-			return getRuleContext(Task_listContext.class,i);
-		}
-		public Logical_preconditionContext logical_precondition(int i) {
-			return getRuleContext(Logical_preconditionContext.class,i);
-		}
-		public Compound_task_atomContext compound_task_atom() {
-			return getRuleContext(Compound_task_atomContext.class,0);
+		public List<Task_listContext> task_list() {
+			return getRuleContexts(Task_listContext.class);
 		}
 		public NameContext name(int i) {
 			return getRuleContext(NameContext.class,i);
@@ -291,8 +273,14 @@ public class JSHOP2Parser extends Parser {
 		public List<NameContext> name() {
 			return getRuleContexts(NameContext.class);
 		}
-		public List<Task_listContext> task_list() {
-			return getRuleContexts(Task_listContext.class);
+		public Compound_task_atomContext compound_task_atom() {
+			return getRuleContext(Compound_task_atomContext.class,0);
+		}
+		public Logical_preconditionContext logical_precondition(int i) {
+			return getRuleContext(Logical_preconditionContext.class,i);
+		}
+		public Task_listContext task_list(int i) {
+			return getRuleContext(Task_listContext.class,i);
 		}
 		public MethodContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -315,8 +303,8 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(89); match(7);
-			setState(90); match(9);
+			setState(89); match(11);
+			setState(90); match(4);
 			setState(91); compound_task_atom();
 			setState(98); 
 			_errHandler.sync(this);
@@ -343,8 +331,8 @@ public class JSHOP2Parser extends Parser {
 				setState(100); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 7) | (1L << NIL) | (1L << SYMBOL))) != 0) );
-			setState(102); match(20);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 11) | (1L << NIL) | (1L << SYMBOL))) != 0) );
+			setState(102); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -363,20 +351,20 @@ public class JSHOP2Parser extends Parser {
 		public Term_listContext deleteList;
 		public Term_listContext addList;
 		public TermContext cost;
+		public Logical_preconditionContext logical_precondition() {
+			return getRuleContext(Logical_preconditionContext.class,0);
+		}
 		public TermContext term() {
 			return getRuleContext(TermContext.class,0);
+		}
+		public List<Term_listContext> term_list() {
+			return getRuleContexts(Term_listContext.class);
 		}
 		public Term_listContext term_list(int i) {
 			return getRuleContext(Term_listContext.class,i);
 		}
 		public Primitive_task_atomContext primitive_task_atom() {
 			return getRuleContext(Primitive_task_atomContext.class,0);
-		}
-		public Logical_preconditionContext logical_precondition() {
-			return getRuleContext(Logical_preconditionContext.class,0);
-		}
-		public List<Term_listContext> term_list() {
-			return getRuleContexts(Term_listContext.class);
 		}
 		public OperatorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -399,7 +387,7 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(104); match(7);
+			setState(104); match(11);
 			setState(105); match(12);
 			setState(106); primitive_task_atom();
 			setState(107); logical_precondition();
@@ -407,71 +395,13 @@ public class JSHOP2Parser extends Parser {
 			setState(109); ((OperatorContext)_localctx).addList = term_list();
 			setState(111);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 7) | (1L << 15) | (1L << NIL) | (1L << SYMBOL) | (1L << NUMBER))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 7) | (1L << 11) | (1L << NIL) | (1L << SYMBOL) | (1L << NUMBER))) != 0)) {
 				{
 				setState(110); ((OperatorContext)_localctx).cost = term();
 				}
 			}
 
-			setState(113); match(20);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class Protection_conditionContext extends ParserRuleContext {
-		public VariableContext variable() {
-			return getRuleContext(VariableContext.class,0);
-		}
-		public Logical_atomContext logical_atom() {
-			return getRuleContext(Logical_atomContext.class,0);
-		}
-		public Protection_conditionContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_protection_condition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterProtection_condition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitProtection_condition(this);
-		}
-	}
-
-	public final Protection_conditionContext protection_condition() throws RecognitionException {
-		Protection_conditionContext _localctx = new Protection_conditionContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_protection_condition);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(115); match(7);
-			setState(116); match(25);
-			setState(119);
-			switch (_input.LA(1)) {
-			case 7:
-				{
-				setState(117); logical_atom();
-				}
-				break;
-			case 15:
-				{
-				setState(118); variable();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			setState(121); match(20);
+			setState(113); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -486,11 +416,11 @@ public class JSHOP2Parser extends Parser {
 	}
 
 	public static class Compound_task_atomContext extends ParserRuleContext {
-		public Compound_taskContext compound_task() {
-			return getRuleContext(Compound_taskContext.class,0);
-		}
 		public TermsContext terms() {
 			return getRuleContext(TermsContext.class,0);
+		}
+		public Compound_taskContext compound_task() {
+			return getRuleContext(Compound_taskContext.class,0);
 		}
 		public Compound_task_atomContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -508,14 +438,14 @@ public class JSHOP2Parser extends Parser {
 
 	public final Compound_task_atomContext compound_task_atom() throws RecognitionException {
 		Compound_task_atomContext _localctx = new Compound_task_atomContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_compound_task_atom);
+		enterRule(_localctx, 10, RULE_compound_task_atom);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(123); match(7);
-			setState(124); compound_task();
-			setState(125); terms();
-			setState(126); match(20);
+			setState(115); match(11);
+			setState(116); compound_task();
+			setState(117); terms();
+			setState(118); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -530,11 +460,11 @@ public class JSHOP2Parser extends Parser {
 	}
 
 	public static class Primitive_task_atomContext extends ParserRuleContext {
-		public TermsContext terms() {
-			return getRuleContext(TermsContext.class,0);
-		}
 		public Primitive_taskContext primitive_task() {
 			return getRuleContext(Primitive_taskContext.class,0);
+		}
+		public TermsContext terms() {
+			return getRuleContext(TermsContext.class,0);
 		}
 		public Primitive_task_atomContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -552,14 +482,14 @@ public class JSHOP2Parser extends Parser {
 
 	public final Primitive_task_atomContext primitive_task_atom() throws RecognitionException {
 		Primitive_task_atomContext _localctx = new Primitive_task_atomContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_primitive_task_atom);
+		enterRule(_localctx, 12, RULE_primitive_task_atom);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(128); match(7);
-			setState(129); primitive_task();
-			setState(130); terms();
-			setState(131); match(20);
+			setState(120); match(11);
+			setState(121); primitive_task();
+			setState(122); terms();
+			setState(123); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -574,7 +504,7 @@ public class JSHOP2Parser extends Parser {
 	}
 
 	public static class Task_listContext extends ParserRuleContext {
-		public Collection<TaskInvoker> _tasksPointers;
+		public Collection<TaskInvoker> _tasksInvokers;
 		public Task_listContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -583,36 +513,7 @@ public class JSHOP2Parser extends Parser {
 		public Task_listContext() { }
 		public void copyFrom(Task_listContext ctx) {
 			super.copyFrom(ctx);
-			this._tasksPointers = ctx._tasksPointers;
-		}
-	}
-	public static class Task_list_CContext extends Task_listContext {
-		public Task_atomContext task_atom(int i) {
-			return getRuleContext(Task_atomContext.class,i);
-		}
-		public List<Task_atomContext> task_atom() {
-			return getRuleContexts(Task_atomContext.class);
-		}
-		public Task_list_CContext(Task_listContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTask_list_C(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTask_list_C(this);
-		}
-	}
-	public static class Task_list_AContext extends Task_listContext {
-		public TerminalNode NIL() { return getToken(JSHOP2Parser.NIL, 0); }
-		public Task_list_AContext(Task_listContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTask_list_A(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTask_list_A(this);
+			this._tasksInvokers = ctx._tasksInvokers;
 		}
 	}
 	public static class Task_list_BContext extends Task_listContext {
@@ -629,19 +530,48 @@ public class JSHOP2Parser extends Parser {
 			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTask_list_B(this);
 		}
 	}
+	public static class Task_list_AContext extends Task_listContext {
+		public TerminalNode NIL() { return getToken(JSHOP2Parser.NIL, 0); }
+		public Task_list_AContext(Task_listContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTask_list_A(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTask_list_A(this);
+		}
+	}
+	public static class Task_list_CContext extends Task_listContext {
+		public List<Task_atomContext> task_atom() {
+			return getRuleContexts(Task_atomContext.class);
+		}
+		public Task_atomContext task_atom(int i) {
+			return getRuleContext(Task_atomContext.class,i);
+		}
+		public Task_list_CContext(Task_listContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTask_list_C(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTask_list_C(this);
+		}
+	}
 
 	public final Task_listContext task_list() throws RecognitionException {
 		Task_listContext _localctx = new Task_listContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_task_list);
+		enterRule(_localctx, 14, RULE_task_list);
 		int _la;
 		try {
-			setState(146);
-			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
+			setState(138);
+			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 			case 1:
 				_localctx = new Task_list_AContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(133); match(NIL);
+				setState(125); match(NIL);
 				}
 				break;
 
@@ -649,7 +579,7 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new Task_list_BContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(134); task_atom();
+				setState(126); task_atom();
 				}
 				break;
 
@@ -657,29 +587,29 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new Task_list_CContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(135); match(7);
-				setState(137);
+				setState(127); match(11);
+				setState(129);
 				_la = _input.LA(1);
-				if (_la==11) {
+				if (_la==25) {
 					{
-					setState(136); match(11);
+					setState(128); match(25);
 					}
 				}
 
-				setState(142);
+				setState(134);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (_la==7) {
+				while (_la==11) {
 					{
 					{
-					setState(139); task_atom();
+					setState(131); task_atom();
 					}
 					}
-					setState(144);
+					setState(136);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(145); match(20);
+				setState(137); match(27);
 				}
 				break;
 			}
@@ -696,7 +626,7 @@ public class JSHOP2Parser extends Parser {
 	}
 
 	public static class Task_atomContext extends ParserRuleContext {
-		public TaskInvoker _taskPointer;
+		public TaskInvoker _taskInvoker;
 		public TermsContext terms() {
 			return getRuleContext(TermsContext.class,0);
 		}
@@ -719,23 +649,23 @@ public class JSHOP2Parser extends Parser {
 
 	public final Task_atomContext task_atom() throws RecognitionException {
 		Task_atomContext _localctx = new Task_atomContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_task_atom);
+		enterRule(_localctx, 16, RULE_task_atom);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(148); match(7);
-			setState(150);
+			setState(140); match(11);
+			setState(142);
 			_la = _input.LA(1);
-			if (_la==28) {
+			if (_la==2) {
 				{
-				setState(149); match(28);
+				setState(141); match(2);
 				}
 			}
 
-			setState(152); task();
-			setState(153); terms();
-			setState(154); match(20);
+			setState(144); task();
+			setState(145); terms();
+			setState(146); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -750,11 +680,11 @@ public class JSHOP2Parser extends Parser {
 	}
 
 	public static class TaskContext extends ParserRuleContext {
-		public Compound_taskContext compound_task() {
-			return getRuleContext(Compound_taskContext.class,0);
-		}
 		public Primitive_taskContext primitive_task() {
 			return getRuleContext(Primitive_taskContext.class,0);
+		}
+		public Compound_taskContext compound_task() {
+			return getRuleContext(Compound_taskContext.class,0);
 		}
 		public TaskContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -772,20 +702,20 @@ public class JSHOP2Parser extends Parser {
 
 	public final TaskContext task() throws RecognitionException {
 		TaskContext _localctx = new TaskContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_task);
+		enterRule(_localctx, 18, RULE_task);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(158);
+			setState(150);
 			switch (_input.LA(1)) {
-			case 31:
+			case 24:
 				{
-				setState(156); primitive_task();
+				setState(148); primitive_task();
 				}
 				break;
 			case SYMBOL:
 				{
-				setState(157); compound_task();
+				setState(149); compound_task();
 				}
 				break;
 			default:
@@ -806,20 +736,20 @@ public class JSHOP2Parser extends Parser {
 
 	public static class AxiomContext extends ParserRuleContext {
 		public LogicalPrecondition _axiom;
-		public Logical_preconditionContext logical_precondition(int i) {
-			return getRuleContext(Logical_preconditionContext.class,i);
+		public NameContext name(int i) {
+			return getRuleContext(NameContext.class,i);
 		}
 		public List<Logical_preconditionContext> logical_precondition() {
 			return getRuleContexts(Logical_preconditionContext.class);
-		}
-		public NameContext name(int i) {
-			return getRuleContext(NameContext.class,i);
 		}
 		public Logical_atomContext logical_atom() {
 			return getRuleContext(Logical_atomContext.class,0);
 		}
 		public List<NameContext> name() {
 			return getRuleContexts(NameContext.class);
+		}
+		public Logical_preconditionContext logical_precondition(int i) {
+			return getRuleContext(Logical_preconditionContext.class,i);
 		}
 		public AxiomContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -837,22 +767,22 @@ public class JSHOP2Parser extends Parser {
 
 	public final AxiomContext axiom() throws RecognitionException {
 		AxiomContext _localctx = new AxiomContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_axiom);
+		enterRule(_localctx, 20, RULE_axiom);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(160); match(7);
-			setState(161); match(21);
-			setState(162); logical_atom();
-			setState(165);
+			setState(152); match(11);
+			setState(153); match(17);
+			setState(154); logical_atom();
+			setState(157);
 			switch (_input.LA(1)) {
 			case SYMBOL:
 				{
-				setState(163); name();
+				setState(155); name();
 				}
 				break;
-			case 7:
+			case 11:
 			case NIL:
 				{
 				}
@@ -860,22 +790,22 @@ public class JSHOP2Parser extends Parser {
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(172); 
+			setState(164); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(167); logical_precondition();
-				setState(170);
+				setState(159); logical_precondition();
+				setState(162);
 				switch (_input.LA(1)) {
 				case SYMBOL:
 					{
-					setState(168); name();
+					setState(160); name();
 					}
 					break;
-				case 7:
-				case 20:
+				case 11:
+				case 27:
 				case NIL:
 					{
 					}
@@ -885,11 +815,11 @@ public class JSHOP2Parser extends Parser {
 				}
 				}
 				}
-				setState(174); 
+				setState(166); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==7 || _la==NIL );
-			setState(176); match(20);
+			} while ( _la==11 || _la==NIL );
+			setState(168); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -973,15 +903,15 @@ public class JSHOP2Parser extends Parser {
 
 	public final Logical_preconditionContext logical_precondition() throws RecognitionException {
 		Logical_preconditionContext _localctx = new Logical_preconditionContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_logical_precondition);
+		enterRule(_localctx, 22, RULE_logical_precondition);
 		try {
-			setState(182);
-			switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
+			setState(174);
+			switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
 			case 1:
 				_localctx = new Logical_precondition_AContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(178); match(NIL);
+				setState(170); match(NIL);
 				}
 				break;
 
@@ -989,7 +919,7 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new Logical_precondition_BContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(179); logical_expression(0);
+				setState(171); logical_expression(0);
 				}
 				break;
 
@@ -997,7 +927,7 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new Logical_precondition_CContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(180); first_satisfier_pre();
+				setState(172); first_satisfier_pre();
 				}
 				break;
 
@@ -1005,7 +935,7 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new Logical_precondition_DContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(181); sorted_pre();
+				setState(173); sorted_pre();
 				}
 				break;
 			}
@@ -1041,14 +971,14 @@ public class JSHOP2Parser extends Parser {
 
 	public final First_satisfier_preContext first_satisfier_pre() throws RecognitionException {
 		First_satisfier_preContext _localctx = new First_satisfier_preContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_first_satisfier_pre);
+		enterRule(_localctx, 24, RULE_first_satisfier_pre);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(184); match(7);
-			setState(185); match(13);
-			setState(186); logical_expression(0);
-			setState(187); match(20);
+			setState(176); match(11);
+			setState(177); match(10);
+			setState(178); logical_expression(0);
+			setState(179); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1063,17 +993,17 @@ public class JSHOP2Parser extends Parser {
 	}
 
 	public static class Sorted_preContext extends ParserRuleContext {
-		public Shop2_comparatorContext shop2_comparator() {
-			return getRuleContext(Shop2_comparatorContext.class,0);
-		}
-		public VariableContext variable() {
-			return getRuleContext(VariableContext.class,0);
-		}
 		public Logical_expressionContext logical_expression() {
 			return getRuleContext(Logical_expressionContext.class,0);
 		}
+		public Shop2_comparatorContext shop2_comparator() {
+			return getRuleContext(Shop2_comparatorContext.class,0);
+		}
 		public Java_classContext java_class() {
 			return getRuleContext(Java_classContext.class,0);
+		}
+		public VariableContext variable() {
+			return getRuleContext(VariableContext.class,0);
 		}
 		public Sorted_preContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1091,31 +1021,31 @@ public class JSHOP2Parser extends Parser {
 
 	public final Sorted_preContext sorted_pre() throws RecognitionException {
 		Sorted_preContext _localctx = new Sorted_preContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_sorted_pre);
+		enterRule(_localctx, 26, RULE_sorted_pre);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(189); match(7);
-			setState(190); match(2);
-			setState(191); variable();
-			setState(194);
+			setState(181); match(11);
+			setState(182); match(19);
+			setState(183); variable();
+			setState(186);
 			switch (_input.LA(1)) {
 			case SYMBOL:
 				{
-				setState(192); java_class();
+				setState(184); java_class();
 				}
 				break;
-			case 8:
-			case 26:
+			case 21:
+			case 23:
 				{
-				setState(193); shop2_comparator();
+				setState(185); shop2_comparator();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(196); logical_expression(0);
-			setState(197); match(20);
+			setState(188); logical_expression(0);
+			setState(189); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1140,53 +1070,6 @@ public class JSHOP2Parser extends Parser {
 		public void copyFrom(Logical_expressionContext ctx) {
 			super.copyFrom(ctx);
 			this._precondition = ctx._precondition;
-		}
-	}
-	public static class ExpVoidContext extends Logical_expressionContext {
-		public Logical_expressionContext logical_expression() {
-			return getRuleContext(Logical_expressionContext.class,0);
-		}
-		public ExpVoidContext(Logical_expressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterExpVoid(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitExpVoid(this);
-		}
-	}
-	public static class ExpAtomContext extends Logical_expressionContext {
-		public Logical_atomContext logical_atom() {
-			return getRuleContext(Logical_atomContext.class,0);
-		}
-		public ExpAtomContext(Logical_expressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterExpAtom(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitExpAtom(this);
-		}
-	}
-	public static class ExpAndNotContext extends Logical_expressionContext {
-		public Logical_expressionContext expA;
-		public Logical_expressionContext expB;
-		public List<Logical_expressionContext> logical_expression() {
-			return getRuleContexts(Logical_expressionContext.class);
-		}
-		public Logical_expressionContext logical_expression(int i) {
-			return getRuleContext(Logical_expressionContext.class,i);
-		}
-		public ExpAndNotContext(Logical_expressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterExpAndNot(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitExpAndNot(this);
 		}
 	}
 	public static class ExpAndContext extends Logical_expressionContext {
@@ -1222,6 +1105,64 @@ public class JSHOP2Parser extends Parser {
 			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitExpTaskAtom(this);
 		}
 	}
+	public static class ExpAndNotContext extends Logical_expressionContext {
+		public Logical_expressionContext expA;
+		public Logical_expressionContext expB;
+		public List<Logical_expressionContext> logical_expression() {
+			return getRuleContexts(Logical_expressionContext.class);
+		}
+		public Logical_expressionContext logical_expression(int i) {
+			return getRuleContext(Logical_expressionContext.class,i);
+		}
+		public ExpAndNotContext(Logical_expressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterExpAndNot(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitExpAndNot(this);
+		}
+	}
+	public static class ExpAtomContext extends Logical_expressionContext {
+		public Logical_atomContext logical_atom() {
+			return getRuleContext(Logical_atomContext.class,0);
+		}
+		public ExpAtomContext(Logical_expressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterExpAtom(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitExpAtom(this);
+		}
+	}
+	public static class ExpSubContext extends Logical_expressionContext {
+		public Logical_expressionContext logical_expression() {
+			return getRuleContext(Logical_expressionContext.class,0);
+		}
+		public ExpSubContext(Logical_expressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterExpSub(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitExpSub(this);
+		}
+	}
+	public static class ExpVoidContext extends Logical_expressionContext {
+		public ExpVoidContext(Logical_expressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterExpVoid(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitExpVoid(this);
+		}
+	}
 
 	public final Logical_expressionContext logical_expression() throws RecognitionException {
 		return logical_expression(0);
@@ -1232,79 +1173,82 @@ public class JSHOP2Parser extends Parser {
 		int _parentState = getState();
 		Logical_expressionContext _localctx = new Logical_expressionContext(_ctx, _parentState);
 		Logical_expressionContext _prevctx = _localctx;
-		int _startState = 30;
-		enterRecursionRule(_localctx, 30, RULE_logical_expression, _p);
+		int _startState = 28;
+		enterRecursionRule(_localctx, 28, RULE_logical_expression, _p);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(207);
-			switch ( getInterpreter().adaptivePredict(_input,18,_ctx) ) {
+			setState(200);
+			switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
 			case 1:
 				{
 				_localctx = new ExpVoidContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(200); match(7);
-				setState(202);
-				_la = _input.LA(1);
-				if (_la==7) {
-					{
-					setState(201); logical_expression(0);
-					}
-				}
-
-				setState(204); match(20);
+				setState(192); match(11);
+				setState(193); match(27);
 				}
 				break;
 
 			case 2:
 				{
-				_localctx = new ExpAtomContext(_localctx);
+				_localctx = new ExpSubContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(205); logical_atom();
+				setState(194); match(11);
+				setState(195); logical_expression(0);
+				setState(196); match(27);
 				}
 				break;
 
 			case 3:
 				{
+				_localctx = new ExpAtomContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(198); logical_atom();
+				}
+				break;
+
+			case 4:
+				{
 				_localctx = new ExpTaskAtomContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(206); task_atom();
+				setState(199); task_atom();
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(225);
+			setState(218);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,22,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,20,_ctx);
 			while ( _alt!=2 && _alt!=ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(223);
-					switch ( getInterpreter().adaptivePredict(_input,21,_ctx) ) {
+					setState(216);
+					switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ExpAndContext(new Logical_expressionContext(_parentctx, _parentState));
 						((ExpAndContext)_localctx).expA = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_logical_expression);
-						setState(209);
-						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(211);
+						setState(202);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+						setState(204);
 						_la = _input.LA(1);
-						if (_la==17) {
+						if (_la==28) {
 							{
-							setState(210); match(17);
+							setState(203); match(28);
 							}
 						}
 
-						setState(213); ((ExpAndContext)_localctx).expB = logical_expression(6);
+						setState(206); ((ExpAndContext)_localctx).expB = logical_expression(7);
 						}
 						break;
 
@@ -1313,28 +1257,28 @@ public class JSHOP2Parser extends Parser {
 						_localctx = new ExpAndNotContext(new Logical_expressionContext(_parentctx, _parentState));
 						((ExpAndNotContext)_localctx).expA = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_logical_expression);
-						setState(214);
-						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(216);
+						setState(207);
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
+						setState(209);
 						_la = _input.LA(1);
-						if (_la==17) {
+						if (_la==28) {
 							{
-							setState(215); match(17);
+							setState(208); match(28);
 							}
 						}
 
-						setState(218); match(7);
-						setState(219); match(6);
-						setState(220); ((ExpAndNotContext)_localctx).expB = logical_expression(0);
-						setState(221); match(20);
+						setState(211); match(11);
+						setState(212); match(30);
+						setState(213); ((ExpAndNotContext)_localctx).expB = logical_expression(0);
+						setState(214); match(27);
 						}
 						break;
 					}
 					} 
 				}
-				setState(227);
+				setState(220);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,22,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,20,_ctx);
 			}
 			}
 		}
@@ -1373,14 +1317,100 @@ public class JSHOP2Parser extends Parser {
 
 	public final Logical_atomContext logical_atom() throws RecognitionException {
 		Logical_atomContext _localctx = new Logical_atomContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_logical_atom);
+		enterRule(_localctx, 30, RULE_logical_atom);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(228); match(7);
-			setState(229); predicate();
-			setState(230); terms();
-			setState(231); match(20);
+			setState(221); match(11);
+			setState(222); predicate();
+			setState(223); terms();
+			setState(224); match(27);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Protection_conditionContext extends ParserRuleContext {
+		public Protection_conditionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_protection_condition; }
+	 
+		public Protection_conditionContext() { }
+		public void copyFrom(Protection_conditionContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class ProtectionConditionAContext extends Protection_conditionContext {
+		public TermsContext terms() {
+			return getRuleContext(TermsContext.class,0);
+		}
+		public PredicateContext predicate() {
+			return getRuleContext(PredicateContext.class,0);
+		}
+		public ProtectionConditionAContext(Protection_conditionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterProtectionConditionA(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitProtectionConditionA(this);
+		}
+	}
+	public static class ProtectionConditionBContext extends Protection_conditionContext {
+		public TermContext term() {
+			return getRuleContext(TermContext.class,0);
+		}
+		public ProtectionConditionBContext(Protection_conditionContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterProtectionConditionB(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitProtectionConditionB(this);
+		}
+	}
+
+	public final Protection_conditionContext protection_condition() throws RecognitionException {
+		Protection_conditionContext _localctx = new Protection_conditionContext(_ctx, getState());
+		enterRule(_localctx, 32, RULE_protection_condition);
+		try {
+			setState(239);
+			switch ( getInterpreter().adaptivePredict(_input,21,_ctx) ) {
+			case 1:
+				_localctx = new ProtectionConditionAContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(226); match(11);
+				setState(227); match(18);
+				setState(228); match(11);
+				setState(229); predicate();
+				setState(230); terms();
+				setState(231); match(27);
+				setState(232); match(27);
+				}
+				break;
+
+			case 2:
+				_localctx = new ProtectionConditionBContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(234); match(11);
+				setState(235); match(18);
+				setState(236); term();
+				setState(237); match(27);
+				}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -1395,7 +1425,7 @@ public class JSHOP2Parser extends Parser {
 	}
 
 	public static class TermsContext extends ParserRuleContext {
-		public Collection<Term> _terms;
+		public List<Term> _terms;
 		public List<TermContext> term() {
 			return getRuleContexts(TermContext.class);
 		}
@@ -1423,16 +1453,16 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(236);
+			setState(244);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 7) | (1L << 15) | (1L << NIL) | (1L << SYMBOL) | (1L << NUMBER))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 7) | (1L << 11) | (1L << NIL) | (1L << SYMBOL) | (1L << NUMBER))) != 0)) {
 				{
 				{
-				setState(233); term();
+				setState(241); term();
 				}
 				}
-				setState(238);
+				setState(246);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1474,9 +1504,9 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(239); match(7);
-			setState(240); terms();
-			setState(241); match(20);
+			setState(247); match(11);
+			setState(248); terms();
+			setState(249); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1493,11 +1523,11 @@ public class JSHOP2Parser extends Parser {
 	public static class List_headContext extends ParserRuleContext {
 		public VariableContext head;
 		public VariableContext list;
-		public List<VariableContext> variable() {
-			return getRuleContexts(VariableContext.class);
-		}
 		public VariableContext variable(int i) {
 			return getRuleContext(VariableContext.class,i);
+		}
+		public List<VariableContext> variable() {
+			return getRuleContexts(VariableContext.class);
 		}
 		public List_headContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1519,11 +1549,11 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(243); match(7);
-			setState(244); ((List_headContext)_localctx).head = variable();
-			setState(245); match(19);
-			setState(246); ((List_headContext)_localctx).list = variable();
-			setState(247); match(20);
+			setState(251); match(11);
+			setState(252); ((List_headContext)_localctx).head = variable();
+			setState(253); match(14);
+			setState(254); ((List_headContext)_localctx).list = variable();
+			setState(255); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1550,46 +1580,40 @@ public class JSHOP2Parser extends Parser {
 			this._term = ctx._term;
 		}
 	}
-	public static class TermHContext extends TermContext {
-		public Term_listContext term_list() {
-			return getRuleContext(Term_listContext.class,0);
-		}
-		public TermHContext(TermContext ctx) { copyFrom(ctx); }
+	public static class TermBContext extends TermContext {
+		public TerminalNode NUMBER() { return getToken(JSHOP2Parser.NUMBER, 0); }
+		public TermBContext(TermContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermH(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermB(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermH(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermB(this);
 		}
 	}
-	public static class TermDContext extends TermContext {
-		public VariableContext variable() {
-			return getRuleContext(VariableContext.class,0);
-		}
-		public TermDContext(TermContext ctx) { copyFrom(ctx); }
+	public static class TermCContext extends TermContext {
+		public TerminalNode SYMBOL() { return getToken(JSHOP2Parser.SYMBOL, 0); }
+		public TermCContext(TermContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermD(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermC(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermD(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermC(this);
 		}
 	}
-	public static class TermEContext extends TermContext {
-		public Call_termContext call_term() {
-			return getRuleContext(Call_termContext.class,0);
-		}
-		public TermEContext(TermContext ctx) { copyFrom(ctx); }
+	public static class TermAContext extends TermContext {
+		public TerminalNode NIL() { return getToken(JSHOP2Parser.NIL, 0); }
+		public TermAContext(TermContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermE(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermA(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermE(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermA(this);
 		}
 	}
 	public static class TermFContext extends TermContext {
@@ -1620,40 +1644,60 @@ public class JSHOP2Parser extends Parser {
 			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermG(this);
 		}
 	}
-	public static class TermAContext extends TermContext {
-		public TerminalNode NIL() { return getToken(JSHOP2Parser.NIL, 0); }
-		public TermAContext(TermContext ctx) { copyFrom(ctx); }
+	public static class TermDContext extends TermContext {
+		public VariableContext variable() {
+			return getRuleContext(VariableContext.class,0);
+		}
+		public TermDContext(TermContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermA(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermD(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermA(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermD(this);
 		}
 	}
-	public static class TermBContext extends TermContext {
-		public TerminalNode NUMBER() { return getToken(JSHOP2Parser.NUMBER, 0); }
-		public TermBContext(TermContext ctx) { copyFrom(ctx); }
+	public static class TermEContext extends TermContext {
+		public Call_termContext call_term() {
+			return getRuleContext(Call_termContext.class,0);
+		}
+		public TermEContext(TermContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermB(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermE(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermB(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermE(this);
 		}
 	}
-	public static class TermCContext extends TermContext {
-		public TerminalNode SYMBOL() { return getToken(JSHOP2Parser.SYMBOL, 0); }
-		public TermCContext(TermContext ctx) { copyFrom(ctx); }
+	public static class TermHContext extends TermContext {
+		public Term_listContext term_list() {
+			return getRuleContext(Term_listContext.class,0);
+		}
+		public TermHContext(TermContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermC(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermH(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermC(this);
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermH(this);
+		}
+	}
+	public static class TermIContext extends TermContext {
+		public Protection_conditionContext protection_condition() {
+			return getRuleContext(Protection_conditionContext.class,0);
+		}
+		public TermIContext(TermContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).enterTermI(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JSHOP2Listener ) ((JSHOP2Listener)listener).exitTermI(this);
 		}
 	}
 
@@ -1661,13 +1705,13 @@ public class JSHOP2Parser extends Parser {
 		TermContext _localctx = new TermContext(_ctx, getState());
 		enterRule(_localctx, 40, RULE_term);
 		try {
-			setState(257);
-			switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
+			setState(266);
+			switch ( getInterpreter().adaptivePredict(_input,23,_ctx) ) {
 			case 1:
 				_localctx = new TermAContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(249); match(NIL);
+				setState(257); match(NIL);
 				}
 				break;
 
@@ -1675,7 +1719,7 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new TermBContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(250); match(NUMBER);
+				setState(258); match(NUMBER);
 				}
 				break;
 
@@ -1683,7 +1727,7 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new TermCContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(251); match(SYMBOL);
+				setState(259); match(SYMBOL);
 				}
 				break;
 
@@ -1691,7 +1735,7 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new TermDContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(252); variable();
+				setState(260); variable();
 				}
 				break;
 
@@ -1699,7 +1743,7 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new TermEContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(253); call_term();
+				setState(261); call_term();
 				}
 				break;
 
@@ -1707,7 +1751,7 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new TermFContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(254); logical_atom();
+				setState(262); logical_atom();
 				}
 				break;
 
@@ -1715,7 +1759,7 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new TermGContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(255); list_head();
+				setState(263); list_head();
 				}
 				break;
 
@@ -1723,7 +1767,15 @@ public class JSHOP2Parser extends Parser {
 				_localctx = new TermHContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(256); term_list();
+				setState(264); term_list();
+				}
+				break;
+
+			case 9:
+				_localctx = new TermIContext(_localctx);
+				enterOuterAlt(_localctx, 9);
+				{
+				setState(265); protection_condition();
 				}
 				break;
 			}
@@ -1746,11 +1798,11 @@ public class JSHOP2Parser extends Parser {
 		public Java_functionContext java_function() {
 			return getRuleContext(Java_functionContext.class,0);
 		}
-		public Shop2_functionContext shop2_function() {
-			return getRuleContext(Shop2_functionContext.class,0);
-		}
 		public TermContext term(int i) {
 			return getRuleContext(TermContext.class,i);
+		}
+		public Shop2_functionContext shop2_function() {
+			return getRuleContext(Shop2_functionContext.class,0);
 		}
 		public Call_termContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1773,47 +1825,47 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(259); match(7);
-			setState(260); match(27);
-			setState(263);
+			setState(268); match(11);
+			setState(269); match(8);
+			setState(272);
 			switch (_input.LA(1)) {
-			case 4:
+			case 1:
+			case 3:
 			case 5:
-			case 8:
-			case 10:
-			case 14:
-			case 18:
-			case 22:
+			case 6:
+			case 9:
+			case 13:
+			case 20:
+			case 21:
 			case 23:
-			case 26:
 			case 29:
-			case 30:
+			case 31:
 				{
-				setState(261); shop2_function();
+				setState(270); shop2_function();
 				}
 				break;
 			case SYMBOL:
 				{
-				setState(262); java_function();
+				setState(271); java_function();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(266); 
+			setState(275); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(265); term();
+				setState(274); term();
 				}
 				}
-				setState(268); 
+				setState(277); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 7) | (1L << 15) | (1L << NIL) | (1L << SYMBOL) | (1L << NUMBER))) != 0) );
-			setState(270); match(20);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 7) | (1L << 11) | (1L << NIL) | (1L << SYMBOL) | (1L << NUMBER))) != 0) );
+			setState(279); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1850,8 +1902,8 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(272); match(15);
-			setState(273); match(SYMBOL);
+			setState(281); match(7);
+			setState(282); match(SYMBOL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1887,16 +1939,16 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(276);
-			switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
+			setState(285);
+			switch ( getInterpreter().adaptivePredict(_input,26,_ctx) ) {
 			case 1:
 				{
-				setState(275); match(31);
+				setState(284); match(24);
 				}
 				break;
 			}
-			setState(278); match(31);
-			setState(279); match(SYMBOL);
+			setState(287); match(24);
+			setState(288); match(SYMBOL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1932,7 +1984,7 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(281); match(SYMBOL);
+			setState(290); match(SYMBOL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1968,7 +2020,7 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(283); match(SYMBOL);
+			setState(292); match(SYMBOL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2004,7 +2056,7 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(285); match(SYMBOL);
+			setState(294); match(SYMBOL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2040,7 +2092,7 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(287); match(SYMBOL);
+			setState(296); match(SYMBOL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2076,7 +2128,7 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(289); match(SYMBOL);
+			setState(298); match(SYMBOL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2112,9 +2164,9 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(291);
+			setState(300);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 4) | (1L << 5) | (1L << 8) | (1L << 10) | (1L << 14) | (1L << 18) | (1L << 22) | (1L << 23) | (1L << 26) | (1L << 29) | (1L << 30))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 1) | (1L << 3) | (1L << 5) | (1L << 6) | (1L << 9) | (1L << 13) | (1L << 20) | (1L << 21) | (1L << 23) | (1L << 29) | (1L << 31))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			consume();
@@ -2153,9 +2205,9 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(293);
+			setState(302);
 			_la = _input.LA(1);
-			if ( !(_la==8 || _la==26) ) {
+			if ( !(_la==21 || _la==23) ) {
 			_errHandler.recoverInline(this);
 			}
 			consume();
@@ -2175,23 +2227,23 @@ public class JSHOP2Parser extends Parser {
 	public static class ProblemContext extends ParserRuleContext {
 		public NameContext problemName;
 		public NameContext domainName;
-		public Initial_stateContext initial_state(int i) {
-			return getRuleContext(Initial_stateContext.class,i);
+		public NameContext name(int i) {
+			return getRuleContext(NameContext.class,i);
 		}
 		public List<GoalsContext> goals() {
 			return getRuleContexts(GoalsContext.class);
 		}
-		public NameContext name(int i) {
-			return getRuleContext(NameContext.class,i);
+		public Initial_stateContext initial_state(int i) {
+			return getRuleContext(Initial_stateContext.class,i);
 		}
-		public GoalsContext goals(int i) {
-			return getRuleContext(GoalsContext.class,i);
+		public List<NameContext> name() {
+			return getRuleContexts(NameContext.class);
 		}
 		public List<Initial_stateContext> initial_state() {
 			return getRuleContexts(Initial_stateContext.class);
 		}
-		public List<NameContext> name() {
-			return getRuleContexts(NameContext.class);
+		public GoalsContext goals(int i) {
+			return getRuleContext(GoalsContext.class,i);
 		}
 		public ProblemContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2214,30 +2266,30 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(295); match(7);
-			setState(296);
+			setState(304); match(11);
+			setState(305);
 			_la = _input.LA(1);
-			if ( !(_la==3 || _la==16) ) {
+			if ( !(_la==16 || _la==26) ) {
 			_errHandler.recoverInline(this);
 			}
 			consume();
-			setState(297); ((ProblemContext)_localctx).problemName = name();
-			setState(298); ((ProblemContext)_localctx).domainName = name();
-			setState(302); 
+			setState(306); ((ProblemContext)_localctx).problemName = name();
+			setState(307); ((ProblemContext)_localctx).domainName = name();
+			setState(311); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(299); initial_state();
-				setState(300); goals();
+				setState(308); initial_state();
+				setState(309); goals();
 				}
 				}
-				setState(304); 
+				setState(313); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==7 );
-			setState(306); match(20);
+			} while ( _la==11 );
+			setState(315); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2252,11 +2304,11 @@ public class JSHOP2Parser extends Parser {
 	}
 
 	public static class Initial_stateContext extends ParserRuleContext {
-		public Logical_atomContext logical_atom(int i) {
-			return getRuleContext(Logical_atomContext.class,i);
-		}
 		public List<Logical_atomContext> logical_atom() {
 			return getRuleContexts(Logical_atomContext.class);
+		}
+		public Logical_atomContext logical_atom(int i) {
+			return getRuleContext(Logical_atomContext.class,i);
 		}
 		public Initial_stateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2279,21 +2331,21 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(308); match(7);
-			setState(312);
+			setState(317); match(11);
+			setState(321);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==7) {
+			while (_la==11) {
 				{
 				{
-				setState(309); logical_atom();
+				setState(318); logical_atom();
 				}
 				}
-				setState(314);
+				setState(323);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(315); match(20);
+			setState(324); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2308,11 +2360,11 @@ public class JSHOP2Parser extends Parser {
 	}
 
 	public static class GoalsContext extends ParserRuleContext {
-		public List<Compound_task_atomContext> compound_task_atom() {
-			return getRuleContexts(Compound_task_atomContext.class);
-		}
 		public Compound_task_atomContext compound_task_atom(int i) {
 			return getRuleContext(Compound_task_atomContext.class,i);
+		}
+		public List<Compound_task_atomContext> compound_task_atom() {
+			return getRuleContexts(Compound_task_atomContext.class);
 		}
 		public GoalsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2335,29 +2387,29 @@ public class JSHOP2Parser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(317); match(7);
-			setState(319);
+			setState(326); match(11);
+			setState(328);
 			_la = _input.LA(1);
-			if (_la==11) {
+			if (_la==25) {
 				{
-				setState(318); match(11);
+				setState(327); match(25);
 				}
 			}
 
-			setState(324);
+			setState(333);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==7) {
+			while (_la==11) {
 				{
 				{
-				setState(321); compound_task_atom();
+				setState(330); compound_task_atom();
 				}
 				}
-				setState(326);
+				setState(335);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(327); match(20);
+			setState(336); match(27);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2373,21 +2425,21 @@ public class JSHOP2Parser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 15: return logical_expression_sempred((Logical_expressionContext)_localctx, predIndex);
+		case 14: return logical_expression_sempred((Logical_expressionContext)_localctx, predIndex);
 		}
 		return true;
 	}
 	private boolean logical_expression_sempred(Logical_expressionContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 0: return precpred(_ctx, 5);
+		case 0: return precpred(_ctx, 6);
 
-		case 1: return precpred(_ctx, 4);
+		case 1: return precpred(_ctx, 5);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3&\u014c\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3&\u0155\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2395,111 +2447,115 @@ public class JSHOP2Parser extends Parser {
 		"\t!\4\"\t\"\4#\t#\3\2\3\2\5\2I\n\2\3\3\3\3\3\3\3\3\3\3\6\3P\n\3\r\3\16"+
 		"\3Q\3\3\3\3\3\3\3\4\3\4\3\4\5\4Z\n\4\3\5\3\5\3\5\3\5\5\5`\n\5\3\5\3\5"+
 		"\3\5\6\5e\n\5\r\5\16\5f\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6r\n\6\3"+
-		"\6\3\6\3\7\3\7\3\7\3\7\5\7z\n\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3"+
-		"\t\3\t\3\t\3\n\3\n\3\n\3\n\5\n\u008c\n\n\3\n\7\n\u008f\n\n\f\n\16\n\u0092"+
-		"\13\n\3\n\5\n\u0095\n\n\3\13\3\13\5\13\u0099\n\13\3\13\3\13\3\13\3\13"+
-		"\3\f\3\f\5\f\u00a1\n\f\3\r\3\r\3\r\3\r\3\r\5\r\u00a8\n\r\3\r\3\r\3\r\5"+
-		"\r\u00ad\n\r\6\r\u00af\n\r\r\r\16\r\u00b0\3\r\3\r\3\16\3\16\3\16\3\16"+
-		"\5\16\u00b9\n\16\3\17\3\17\3\17\3\17\3\17\3\20\3\20\3\20\3\20\3\20\5\20"+
-		"\u00c5\n\20\3\20\3\20\3\20\3\21\3\21\3\21\5\21\u00cd\n\21\3\21\3\21\3"+
-		"\21\5\21\u00d2\n\21\3\21\3\21\5\21\u00d6\n\21\3\21\3\21\3\21\5\21\u00db"+
-		"\n\21\3\21\3\21\3\21\3\21\3\21\7\21\u00e2\n\21\f\21\16\21\u00e5\13\21"+
-		"\3\22\3\22\3\22\3\22\3\22\3\23\7\23\u00ed\n\23\f\23\16\23\u00f0\13\23"+
-		"\3\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\3\25\3\26\3\26\3\26\3\26"+
-		"\3\26\3\26\3\26\3\26\5\26\u0104\n\26\3\27\3\27\3\27\3\27\5\27\u010a\n"+
-		"\27\3\27\6\27\u010d\n\27\r\27\16\27\u010e\3\27\3\27\3\30\3\30\3\30\3\31"+
-		"\5\31\u0117\n\31\3\31\3\31\3\31\3\32\3\32\3\33\3\33\3\34\3\34\3\35\3\35"+
-		"\3\36\3\36\3\37\3\37\3 \3 \3!\3!\3!\3!\3!\3!\3!\6!\u0131\n!\r!\16!\u0132"+
-		"\3!\3!\3\"\3\"\7\"\u0139\n\"\f\"\16\"\u013c\13\"\3\"\3\"\3#\3#\5#\u0142"+
-		"\n#\3#\7#\u0145\n#\f#\16#\u0148\13#\3#\3#\3#\2\3 $\2\4\6\b\n\f\16\20\22"+
-		"\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BD\2\6\4\2\3\3\32\32\n\2\6"+
-		"\7\n\n\f\f\20\20\24\24\30\31\34\34\37 \4\2\n\n\34\34\4\2\5\5\22\22\u0154"+
-		"\2H\3\2\2\2\4J\3\2\2\2\6Y\3\2\2\2\b[\3\2\2\2\nj\3\2\2\2\fu\3\2\2\2\16"+
-		"}\3\2\2\2\20\u0082\3\2\2\2\22\u0094\3\2\2\2\24\u0096\3\2\2\2\26\u00a0"+
-		"\3\2\2\2\30\u00a2\3\2\2\2\32\u00b8\3\2\2\2\34\u00ba\3\2\2\2\36\u00bf\3"+
-		"\2\2\2 \u00d1\3\2\2\2\"\u00e6\3\2\2\2$\u00ee\3\2\2\2&\u00f1\3\2\2\2(\u00f5"+
-		"\3\2\2\2*\u0103\3\2\2\2,\u0105\3\2\2\2.\u0112\3\2\2\2\60\u0116\3\2\2\2"+
-		"\62\u011b\3\2\2\2\64\u011d\3\2\2\2\66\u011f\3\2\2\28\u0121\3\2\2\2:\u0123"+
-		"\3\2\2\2<\u0125\3\2\2\2>\u0127\3\2\2\2@\u0129\3\2\2\2B\u0136\3\2\2\2D"+
-		"\u013f\3\2\2\2FI\5\4\3\2GI\5@!\2HF\3\2\2\2HG\3\2\2\2I\3\3\2\2\2JK\7\t"+
-		"\2\2KL\t\2\2\2LM\5:\36\2MO\7\t\2\2NP\5\6\4\2ON\3\2\2\2PQ\3\2\2\2QO\3\2"+
-		"\2\2QR\3\2\2\2RS\3\2\2\2ST\7\26\2\2TU\7\26\2\2U\5\3\2\2\2VZ\5\n\6\2WZ"+
-		"\5\b\5\2XZ\5\30\r\2YV\3\2\2\2YW\3\2\2\2YX\3\2\2\2Z\7\3\2\2\2[\\\7\t\2"+
-		"\2\\]\7\13\2\2]d\5\16\b\2^`\5:\36\2_^\3\2\2\2_`\3\2\2\2`a\3\2\2\2ab\5"+
-		"\32\16\2bc\5\22\n\2ce\3\2\2\2d_\3\2\2\2ef\3\2\2\2fd\3\2\2\2fg\3\2\2\2"+
-		"gh\3\2\2\2hi\7\26\2\2i\t\3\2\2\2jk\7\t\2\2kl\7\16\2\2lm\5\20\t\2mn\5\32"+
-		"\16\2no\5&\24\2oq\5&\24\2pr\5*\26\2qp\3\2\2\2qr\3\2\2\2rs\3\2\2\2st\7"+
-		"\26\2\2t\13\3\2\2\2uv\7\t\2\2vy\7\33\2\2wz\5\"\22\2xz\5.\30\2yw\3\2\2"+
-		"\2yx\3\2\2\2z{\3\2\2\2{|\7\26\2\2|\r\3\2\2\2}~\7\t\2\2~\177\5\64\33\2"+
-		"\177\u0080\5$\23\2\u0080\u0081\7\26\2\2\u0081\17\3\2\2\2\u0082\u0083\7"+
-		"\t\2\2\u0083\u0084\5\60\31\2\u0084\u0085\5$\23\2\u0085\u0086\7\26\2\2"+
-		"\u0086\21\3\2\2\2\u0087\u0095\7$\2\2\u0088\u0095\5\24\13\2\u0089\u008b"+
-		"\7\t\2\2\u008a\u008c\7\r\2\2\u008b\u008a\3\2\2\2\u008b\u008c\3\2\2\2\u008c"+
-		"\u0090\3\2\2\2\u008d\u008f\5\24\13\2\u008e\u008d\3\2\2\2\u008f\u0092\3"+
-		"\2\2\2\u0090\u008e\3\2\2\2\u0090\u0091\3\2\2\2\u0091\u0093\3\2\2\2\u0092"+
-		"\u0090\3\2\2\2\u0093\u0095\7\26\2\2\u0094\u0087\3\2\2\2\u0094\u0088\3"+
-		"\2\2\2\u0094\u0089\3\2\2\2\u0095\23\3\2\2\2\u0096\u0098\7\t\2\2\u0097"+
-		"\u0099\7\36\2\2\u0098\u0097\3\2\2\2\u0098\u0099\3\2\2\2\u0099\u009a\3"+
-		"\2\2\2\u009a\u009b\5\26\f\2\u009b\u009c\5$\23\2\u009c\u009d\7\26\2\2\u009d"+
-		"\25\3\2\2\2\u009e\u00a1\5\60\31\2\u009f\u00a1\5\64\33\2\u00a0\u009e\3"+
-		"\2\2\2\u00a0\u009f\3\2\2\2\u00a1\27\3\2\2\2\u00a2\u00a3\7\t\2\2\u00a3"+
-		"\u00a4\7\27\2\2\u00a4\u00a7\5\"\22\2\u00a5\u00a8\5:\36\2\u00a6\u00a8\3"+
-		"\2\2\2\u00a7\u00a5\3\2\2\2\u00a7\u00a6\3\2\2\2\u00a8\u00ae\3\2\2\2\u00a9"+
-		"\u00ac\5\32\16\2\u00aa\u00ad\5:\36\2\u00ab\u00ad\3\2\2\2\u00ac\u00aa\3"+
-		"\2\2\2\u00ac\u00ab\3\2\2\2\u00ad\u00af\3\2\2\2\u00ae\u00a9\3\2\2\2\u00af"+
-		"\u00b0\3\2\2\2\u00b0\u00ae\3\2\2\2\u00b0\u00b1\3\2\2\2\u00b1\u00b2\3\2"+
-		"\2\2\u00b2\u00b3\7\26\2\2\u00b3\31\3\2\2\2\u00b4\u00b9\7$\2\2\u00b5\u00b9"+
-		"\5 \21\2\u00b6\u00b9\5\34\17\2\u00b7\u00b9\5\36\20\2\u00b8\u00b4\3\2\2"+
-		"\2\u00b8\u00b5\3\2\2\2\u00b8\u00b6\3\2\2\2\u00b8\u00b7\3\2\2\2\u00b9\33"+
-		"\3\2\2\2\u00ba\u00bb\7\t\2\2\u00bb\u00bc\7\17\2\2\u00bc\u00bd\5 \21\2"+
-		"\u00bd\u00be\7\26\2\2\u00be\35\3\2\2\2\u00bf\u00c0\7\t\2\2\u00c0\u00c1"+
-		"\7\4\2\2\u00c1\u00c4\5.\30\2\u00c2\u00c5\58\35\2\u00c3\u00c5\5> \2\u00c4"+
-		"\u00c2\3\2\2\2\u00c4\u00c3\3\2\2\2\u00c5\u00c6\3\2\2\2\u00c6\u00c7\5 "+
-		"\21\2\u00c7\u00c8\7\26\2\2\u00c8\37\3\2\2\2\u00c9\u00ca\b\21\1\2\u00ca"+
-		"\u00cc\7\t\2\2\u00cb\u00cd\5 \21\2\u00cc\u00cb\3\2\2\2\u00cc\u00cd\3\2"+
-		"\2\2\u00cd\u00ce\3\2\2\2\u00ce\u00d2\7\26\2\2\u00cf\u00d2\5\"\22\2\u00d0"+
-		"\u00d2\5\24\13\2\u00d1\u00c9\3\2\2\2\u00d1\u00cf\3\2\2\2\u00d1\u00d0\3"+
-		"\2\2\2\u00d2\u00e3\3\2\2\2\u00d3\u00d5\f\7\2\2\u00d4\u00d6\7\23\2\2\u00d5"+
-		"\u00d4\3\2\2\2\u00d5\u00d6\3\2\2\2\u00d6\u00d7\3\2\2\2\u00d7\u00e2\5 "+
-		"\21\b\u00d8\u00da\f\6\2\2\u00d9\u00db\7\23\2\2\u00da\u00d9\3\2\2\2\u00da"+
-		"\u00db\3\2\2\2\u00db\u00dc\3\2\2\2\u00dc\u00dd\7\t\2\2\u00dd\u00de\7\b"+
-		"\2\2\u00de\u00df\5 \21\2\u00df\u00e0\7\26\2\2\u00e0\u00e2\3\2\2\2\u00e1"+
-		"\u00d3\3\2\2\2\u00e1\u00d8\3\2\2\2\u00e2\u00e5\3\2\2\2\u00e3\u00e1\3\2"+
-		"\2\2\u00e3\u00e4\3\2\2\2\u00e4!\3\2\2\2\u00e5\u00e3\3\2\2\2\u00e6\u00e7"+
-		"\7\t\2\2\u00e7\u00e8\5\62\32\2\u00e8\u00e9\5$\23\2\u00e9\u00ea\7\26\2"+
-		"\2\u00ea#\3\2\2\2\u00eb\u00ed\5*\26\2\u00ec\u00eb\3\2\2\2\u00ed\u00f0"+
-		"\3\2\2\2\u00ee\u00ec\3\2\2\2\u00ee\u00ef\3\2\2\2\u00ef%\3\2\2\2\u00f0"+
-		"\u00ee\3\2\2\2\u00f1\u00f2\7\t\2\2\u00f2\u00f3\5$\23\2\u00f3\u00f4\7\26"+
-		"\2\2\u00f4\'\3\2\2\2\u00f5\u00f6\7\t\2\2\u00f6\u00f7\5.\30\2\u00f7\u00f8"+
-		"\7\25\2\2\u00f8\u00f9\5.\30\2\u00f9\u00fa\7\26\2\2\u00fa)\3\2\2\2\u00fb"+
-		"\u0104\7$\2\2\u00fc\u0104\7&\2\2\u00fd\u0104\7%\2\2\u00fe\u0104\5.\30"+
-		"\2\u00ff\u0104\5,\27\2\u0100\u0104\5\"\22\2\u0101\u0104\5(\25\2\u0102"+
-		"\u0104\5&\24\2\u0103\u00fb\3\2\2\2\u0103\u00fc\3\2\2\2\u0103\u00fd\3\2"+
-		"\2\2\u0103\u00fe\3\2\2\2\u0103\u00ff\3\2\2\2\u0103\u0100\3\2\2\2\u0103"+
-		"\u0101\3\2\2\2\u0103\u0102\3\2\2\2\u0104+\3\2\2\2\u0105\u0106\7\t\2\2"+
-		"\u0106\u0109\7\35\2\2\u0107\u010a\5<\37\2\u0108\u010a\5\66\34\2\u0109"+
-		"\u0107\3\2\2\2\u0109\u0108\3\2\2\2\u010a\u010c\3\2\2\2\u010b\u010d\5*"+
-		"\26\2\u010c\u010b\3\2\2\2\u010d\u010e\3\2\2\2\u010e\u010c\3\2\2\2\u010e"+
-		"\u010f\3\2\2\2\u010f\u0110\3\2\2\2\u0110\u0111\7\26\2\2\u0111-\3\2\2\2"+
-		"\u0112\u0113\7\21\2\2\u0113\u0114\7%\2\2\u0114/\3\2\2\2\u0115\u0117\7"+
-		"!\2\2\u0116\u0115\3\2\2\2\u0116\u0117\3\2\2\2\u0117\u0118\3\2\2\2\u0118"+
-		"\u0119\7!\2\2\u0119\u011a\7%\2\2\u011a\61\3\2\2\2\u011b\u011c\7%\2\2\u011c"+
-		"\63\3\2\2\2\u011d\u011e\7%\2\2\u011e\65\3\2\2\2\u011f\u0120\7%\2\2\u0120"+
-		"\67\3\2\2\2\u0121\u0122\7%\2\2\u01229\3\2\2\2\u0123\u0124\7%\2\2\u0124"+
-		";\3\2\2\2\u0125\u0126\t\3\2\2\u0126=\3\2\2\2\u0127\u0128\t\4\2\2\u0128"+
-		"?\3\2\2\2\u0129\u012a\7\t\2\2\u012a\u012b\t\5\2\2\u012b\u012c\5:\36\2"+
-		"\u012c\u0130\5:\36\2\u012d\u012e\5B\"\2\u012e\u012f\5D#\2\u012f\u0131"+
-		"\3\2\2\2\u0130\u012d\3\2\2\2\u0131\u0132\3\2\2\2\u0132\u0130\3\2\2\2\u0132"+
-		"\u0133\3\2\2\2\u0133\u0134\3\2\2\2\u0134\u0135\7\26\2\2\u0135A\3\2\2\2"+
-		"\u0136\u013a\7\t\2\2\u0137\u0139\5\"\22\2\u0138\u0137\3\2\2\2\u0139\u013c"+
-		"\3\2\2\2\u013a\u0138\3\2\2\2\u013a\u013b\3\2\2\2\u013b\u013d\3\2\2\2\u013c"+
-		"\u013a\3\2\2\2\u013d\u013e\7\26\2\2\u013eC\3\2\2\2\u013f\u0141\7\t\2\2"+
-		"\u0140\u0142\7\r\2\2\u0141\u0140\3\2\2\2\u0141\u0142\3\2\2\2\u0142\u0146"+
-		"\3\2\2\2\u0143\u0145\5\16\b\2\u0144\u0143\3\2\2\2\u0145\u0148\3\2\2\2"+
-		"\u0146\u0144\3\2\2\2\u0146\u0147\3\2\2\2\u0147\u0149\3\2\2\2\u0148\u0146"+
-		"\3\2\2\2\u0149\u014a\7\26\2\2\u014aE\3\2\2\2\"HQY_fqy\u008b\u0090\u0094"+
-		"\u0098\u00a0\u00a7\u00ac\u00b0\u00b8\u00c4\u00cc\u00d1\u00d5\u00da\u00e1"+
-		"\u00e3\u00ee\u0103\u0109\u010e\u0116\u0132\u013a\u0141\u0146";
+		"\6\3\6\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\5\t\u0084"+
+		"\n\t\3\t\7\t\u0087\n\t\f\t\16\t\u008a\13\t\3\t\5\t\u008d\n\t\3\n\3\n\5"+
+		"\n\u0091\n\n\3\n\3\n\3\n\3\n\3\13\3\13\5\13\u0099\n\13\3\f\3\f\3\f\3\f"+
+		"\3\f\5\f\u00a0\n\f\3\f\3\f\3\f\5\f\u00a5\n\f\6\f\u00a7\n\f\r\f\16\f\u00a8"+
+		"\3\f\3\f\3\r\3\r\3\r\3\r\5\r\u00b1\n\r\3\16\3\16\3\16\3\16\3\16\3\17\3"+
+		"\17\3\17\3\17\3\17\5\17\u00bd\n\17\3\17\3\17\3\17\3\20\3\20\3\20\3\20"+
+		"\3\20\3\20\3\20\3\20\3\20\5\20\u00cb\n\20\3\20\3\20\5\20\u00cf\n\20\3"+
+		"\20\3\20\3\20\5\20\u00d4\n\20\3\20\3\20\3\20\3\20\3\20\7\20\u00db\n\20"+
+		"\f\20\16\20\u00de\13\20\3\21\3\21\3\21\3\21\3\21\3\22\3\22\3\22\3\22\3"+
+		"\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\5\22\u00f2\n\22\3\23\7\23"+
+		"\u00f5\n\23\f\23\16\23\u00f8\13\23\3\24\3\24\3\24\3\24\3\25\3\25\3\25"+
+		"\3\25\3\25\3\25\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\5\26\u010d"+
+		"\n\26\3\27\3\27\3\27\3\27\5\27\u0113\n\27\3\27\6\27\u0116\n\27\r\27\16"+
+		"\27\u0117\3\27\3\27\3\30\3\30\3\30\3\31\5\31\u0120\n\31\3\31\3\31\3\31"+
+		"\3\32\3\32\3\33\3\33\3\34\3\34\3\35\3\35\3\36\3\36\3\37\3\37\3 \3 \3!"+
+		"\3!\3!\3!\3!\3!\3!\6!\u013a\n!\r!\16!\u013b\3!\3!\3\"\3\"\7\"\u0142\n"+
+		"\"\f\"\16\"\u0145\13\"\3\"\3\"\3#\3#\5#\u014b\n#\3#\7#\u014e\n#\f#\16"+
+		"#\u0151\13#\3#\3#\3#\2\3\36$\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \""+
+		"$&(*,.\60\62\64\668:<>@BD\2\6\4\2\21\21\30\30\13\2\3\3\5\5\7\b\13\13\17"+
+		"\17\26\27\31\31\37\37!!\4\2\27\27\31\31\4\2\22\22\34\34\u015e\2H\3\2\2"+
+		"\2\4J\3\2\2\2\6Y\3\2\2\2\b[\3\2\2\2\nj\3\2\2\2\fu\3\2\2\2\16z\3\2\2\2"+
+		"\20\u008c\3\2\2\2\22\u008e\3\2\2\2\24\u0098\3\2\2\2\26\u009a\3\2\2\2\30"+
+		"\u00b0\3\2\2\2\32\u00b2\3\2\2\2\34\u00b7\3\2\2\2\36\u00ca\3\2\2\2 \u00df"+
+		"\3\2\2\2\"\u00f1\3\2\2\2$\u00f6\3\2\2\2&\u00f9\3\2\2\2(\u00fd\3\2\2\2"+
+		"*\u010c\3\2\2\2,\u010e\3\2\2\2.\u011b\3\2\2\2\60\u011f\3\2\2\2\62\u0124"+
+		"\3\2\2\2\64\u0126\3\2\2\2\66\u0128\3\2\2\28\u012a\3\2\2\2:\u012c\3\2\2"+
+		"\2<\u012e\3\2\2\2>\u0130\3\2\2\2@\u0132\3\2\2\2B\u013f\3\2\2\2D\u0148"+
+		"\3\2\2\2FI\5\4\3\2GI\5@!\2HF\3\2\2\2HG\3\2\2\2I\3\3\2\2\2JK\7\r\2\2KL"+
+		"\t\2\2\2LM\5:\36\2MO\7\r\2\2NP\5\6\4\2ON\3\2\2\2PQ\3\2\2\2QO\3\2\2\2Q"+
+		"R\3\2\2\2RS\3\2\2\2ST\7\35\2\2TU\7\35\2\2U\5\3\2\2\2VZ\5\n\6\2WZ\5\b\5"+
+		"\2XZ\5\26\f\2YV\3\2\2\2YW\3\2\2\2YX\3\2\2\2Z\7\3\2\2\2[\\\7\r\2\2\\]\7"+
+		"\6\2\2]d\5\f\7\2^`\5:\36\2_^\3\2\2\2_`\3\2\2\2`a\3\2\2\2ab\5\30\r\2bc"+
+		"\5\20\t\2ce\3\2\2\2d_\3\2\2\2ef\3\2\2\2fd\3\2\2\2fg\3\2\2\2gh\3\2\2\2"+
+		"hi\7\35\2\2i\t\3\2\2\2jk\7\r\2\2kl\7\16\2\2lm\5\16\b\2mn\5\30\r\2no\5"+
+		"&\24\2oq\5&\24\2pr\5*\26\2qp\3\2\2\2qr\3\2\2\2rs\3\2\2\2st\7\35\2\2t\13"+
+		"\3\2\2\2uv\7\r\2\2vw\5\64\33\2wx\5$\23\2xy\7\35\2\2y\r\3\2\2\2z{\7\r\2"+
+		"\2{|\5\60\31\2|}\5$\23\2}~\7\35\2\2~\17\3\2\2\2\177\u008d\7$\2\2\u0080"+
+		"\u008d\5\22\n\2\u0081\u0083\7\r\2\2\u0082\u0084\7\33\2\2\u0083\u0082\3"+
+		"\2\2\2\u0083\u0084\3\2\2\2\u0084\u0088\3\2\2\2\u0085\u0087\5\22\n\2\u0086"+
+		"\u0085\3\2\2\2\u0087\u008a\3\2\2\2\u0088\u0086\3\2\2\2\u0088\u0089\3\2"+
+		"\2\2\u0089\u008b\3\2\2\2\u008a\u0088\3\2\2\2\u008b\u008d\7\35\2\2\u008c"+
+		"\177\3\2\2\2\u008c\u0080\3\2\2\2\u008c\u0081\3\2\2\2\u008d\21\3\2\2\2"+
+		"\u008e\u0090\7\r\2\2\u008f\u0091\7\4\2\2\u0090\u008f\3\2\2\2\u0090\u0091"+
+		"\3\2\2\2\u0091\u0092\3\2\2\2\u0092\u0093\5\24\13\2\u0093\u0094\5$\23\2"+
+		"\u0094\u0095\7\35\2\2\u0095\23\3\2\2\2\u0096\u0099\5\60\31\2\u0097\u0099"+
+		"\5\64\33\2\u0098\u0096\3\2\2\2\u0098\u0097\3\2\2\2\u0099\25\3\2\2\2\u009a"+
+		"\u009b\7\r\2\2\u009b\u009c\7\23\2\2\u009c\u009f\5 \21\2\u009d\u00a0\5"+
+		":\36\2\u009e\u00a0\3\2\2\2\u009f\u009d\3\2\2\2\u009f\u009e\3\2\2\2\u00a0"+
+		"\u00a6\3\2\2\2\u00a1\u00a4\5\30\r\2\u00a2\u00a5\5:\36\2\u00a3\u00a5\3"+
+		"\2\2\2\u00a4\u00a2\3\2\2\2\u00a4\u00a3\3\2\2\2\u00a5\u00a7\3\2\2\2\u00a6"+
+		"\u00a1\3\2\2\2\u00a7\u00a8\3\2\2\2\u00a8\u00a6\3\2\2\2\u00a8\u00a9\3\2"+
+		"\2\2\u00a9\u00aa\3\2\2\2\u00aa\u00ab\7\35\2\2\u00ab\27\3\2\2\2\u00ac\u00b1"+
+		"\7$\2\2\u00ad\u00b1\5\36\20\2\u00ae\u00b1\5\32\16\2\u00af\u00b1\5\34\17"+
+		"\2\u00b0\u00ac\3\2\2\2\u00b0\u00ad\3\2\2\2\u00b0\u00ae\3\2\2\2\u00b0\u00af"+
+		"\3\2\2\2\u00b1\31\3\2\2\2\u00b2\u00b3\7\r\2\2\u00b3\u00b4\7\f\2\2\u00b4"+
+		"\u00b5\5\36\20\2\u00b5\u00b6\7\35\2\2\u00b6\33\3\2\2\2\u00b7\u00b8\7\r"+
+		"\2\2\u00b8\u00b9\7\25\2\2\u00b9\u00bc\5.\30\2\u00ba\u00bd\58\35\2\u00bb"+
+		"\u00bd\5> \2\u00bc\u00ba\3\2\2\2\u00bc\u00bb\3\2\2\2\u00bd\u00be\3\2\2"+
+		"\2\u00be\u00bf\5\36\20\2\u00bf\u00c0\7\35\2\2\u00c0\35\3\2\2\2\u00c1\u00c2"+
+		"\b\20\1\2\u00c2\u00c3\7\r\2\2\u00c3\u00cb\7\35\2\2\u00c4\u00c5\7\r\2\2"+
+		"\u00c5\u00c6\5\36\20\2\u00c6\u00c7\7\35\2\2\u00c7\u00cb\3\2\2\2\u00c8"+
+		"\u00cb\5 \21\2\u00c9\u00cb\5\22\n\2\u00ca\u00c1\3\2\2\2\u00ca\u00c4\3"+
+		"\2\2\2\u00ca\u00c8\3\2\2\2\u00ca\u00c9\3\2\2\2\u00cb\u00dc\3\2\2\2\u00cc"+
+		"\u00ce\f\b\2\2\u00cd\u00cf\7\36\2\2\u00ce\u00cd\3\2\2\2\u00ce\u00cf\3"+
+		"\2\2\2\u00cf\u00d0\3\2\2\2\u00d0\u00db\5\36\20\t\u00d1\u00d3\f\7\2\2\u00d2"+
+		"\u00d4\7\36\2\2\u00d3\u00d2\3\2\2\2\u00d3\u00d4\3\2\2\2\u00d4\u00d5\3"+
+		"\2\2\2\u00d5\u00d6\7\r\2\2\u00d6\u00d7\7 \2\2\u00d7\u00d8\5\36\20\2\u00d8"+
+		"\u00d9\7\35\2\2\u00d9\u00db\3\2\2\2\u00da\u00cc\3\2\2\2\u00da\u00d1\3"+
+		"\2\2\2\u00db\u00de\3\2\2\2\u00dc\u00da\3\2\2\2\u00dc\u00dd\3\2\2\2\u00dd"+
+		"\37\3\2\2\2\u00de\u00dc\3\2\2\2\u00df\u00e0\7\r\2\2\u00e0\u00e1\5\62\32"+
+		"\2\u00e1\u00e2\5$\23\2\u00e2\u00e3\7\35\2\2\u00e3!\3\2\2\2\u00e4\u00e5"+
+		"\7\r\2\2\u00e5\u00e6\7\24\2\2\u00e6\u00e7\7\r\2\2\u00e7\u00e8\5\62\32"+
+		"\2\u00e8\u00e9\5$\23\2\u00e9\u00ea\7\35\2\2\u00ea\u00eb\7\35\2\2\u00eb"+
+		"\u00f2\3\2\2\2\u00ec\u00ed\7\r\2\2\u00ed\u00ee\7\24\2\2\u00ee\u00ef\5"+
+		"*\26\2\u00ef\u00f0\7\35\2\2\u00f0\u00f2\3\2\2\2\u00f1\u00e4\3\2\2\2\u00f1"+
+		"\u00ec\3\2\2\2\u00f2#\3\2\2\2\u00f3\u00f5\5*\26\2\u00f4\u00f3\3\2\2\2"+
+		"\u00f5\u00f8\3\2\2\2\u00f6\u00f4\3\2\2\2\u00f6\u00f7\3\2\2\2\u00f7%\3"+
+		"\2\2\2\u00f8\u00f6\3\2\2\2\u00f9\u00fa\7\r\2\2\u00fa\u00fb\5$\23\2\u00fb"+
+		"\u00fc\7\35\2\2\u00fc\'\3\2\2\2\u00fd\u00fe\7\r\2\2\u00fe\u00ff\5.\30"+
+		"\2\u00ff\u0100\7\20\2\2\u0100\u0101\5.\30\2\u0101\u0102\7\35\2\2\u0102"+
+		")\3\2\2\2\u0103\u010d\7$\2\2\u0104\u010d\7&\2\2\u0105\u010d\7%\2\2\u0106"+
+		"\u010d\5.\30\2\u0107\u010d\5,\27\2\u0108\u010d\5 \21\2\u0109\u010d\5("+
+		"\25\2\u010a\u010d\5&\24\2\u010b\u010d\5\"\22\2\u010c\u0103\3\2\2\2\u010c"+
+		"\u0104\3\2\2\2\u010c\u0105\3\2\2\2\u010c\u0106\3\2\2\2\u010c\u0107\3\2"+
+		"\2\2\u010c\u0108\3\2\2\2\u010c\u0109\3\2\2\2\u010c\u010a\3\2\2\2\u010c"+
+		"\u010b\3\2\2\2\u010d+\3\2\2\2\u010e\u010f\7\r\2\2\u010f\u0112\7\n\2\2"+
+		"\u0110\u0113\5<\37\2\u0111\u0113\5\66\34\2\u0112\u0110\3\2\2\2\u0112\u0111"+
+		"\3\2\2\2\u0113\u0115\3\2\2\2\u0114\u0116\5*\26\2\u0115\u0114\3\2\2\2\u0116"+
+		"\u0117\3\2\2\2\u0117\u0115\3\2\2\2\u0117\u0118\3\2\2\2\u0118\u0119\3\2"+
+		"\2\2\u0119\u011a\7\35\2\2\u011a-\3\2\2\2\u011b\u011c\7\t\2\2\u011c\u011d"+
+		"\7%\2\2\u011d/\3\2\2\2\u011e\u0120\7\32\2\2\u011f\u011e\3\2\2\2\u011f"+
+		"\u0120\3\2\2\2\u0120\u0121\3\2\2\2\u0121\u0122\7\32\2\2\u0122\u0123\7"+
+		"%\2\2\u0123\61\3\2\2\2\u0124\u0125\7%\2\2\u0125\63\3\2\2\2\u0126\u0127"+
+		"\7%\2\2\u0127\65\3\2\2\2\u0128\u0129\7%\2\2\u0129\67\3\2\2\2\u012a\u012b"+
+		"\7%\2\2\u012b9\3\2\2\2\u012c\u012d\7%\2\2\u012d;\3\2\2\2\u012e\u012f\t"+
+		"\3\2\2\u012f=\3\2\2\2\u0130\u0131\t\4\2\2\u0131?\3\2\2\2\u0132\u0133\7"+
+		"\r\2\2\u0133\u0134\t\5\2\2\u0134\u0135\5:\36\2\u0135\u0139\5:\36\2\u0136"+
+		"\u0137\5B\"\2\u0137\u0138\5D#\2\u0138\u013a\3\2\2\2\u0139\u0136\3\2\2"+
+		"\2\u013a\u013b\3\2\2\2\u013b\u0139\3\2\2\2\u013b\u013c\3\2\2\2\u013c\u013d"+
+		"\3\2\2\2\u013d\u013e\7\35\2\2\u013eA\3\2\2\2\u013f\u0143\7\r\2\2\u0140"+
+		"\u0142\5 \21\2\u0141\u0140\3\2\2\2\u0142\u0145\3\2\2\2\u0143\u0141\3\2"+
+		"\2\2\u0143\u0144\3\2\2\2\u0144\u0146\3\2\2\2\u0145\u0143\3\2\2\2\u0146"+
+		"\u0147\7\35\2\2\u0147C\3\2\2\2\u0148\u014a\7\r\2\2\u0149\u014b\7\33\2"+
+		"\2\u014a\u0149\3\2\2\2\u014a\u014b\3\2\2\2\u014b\u014f\3\2\2\2\u014c\u014e"+
+		"\5\f\7\2\u014d\u014c\3\2\2\2\u014e\u0151\3\2\2\2\u014f\u014d\3\2\2\2\u014f"+
+		"\u0150\3\2\2\2\u0150\u0152\3\2\2\2\u0151\u014f\3\2\2\2\u0152\u0153\7\35"+
+		"\2\2\u0153E\3\2\2\2!HQY_fq\u0083\u0088\u008c\u0090\u0098\u009f\u00a4\u00a8"+
+		"\u00b0\u00bc\u00ca\u00ce\u00d3\u00da\u00dc\u00f1\u00f6\u010c\u0112\u0117"+
+		"\u011f\u013b\u0143\u014a\u014f";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

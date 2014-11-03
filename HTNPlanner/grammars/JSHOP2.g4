@@ -34,18 +34,16 @@ operator returns [Operator _operator]: '(' ':operator'
 		cost=term?
 		')';
 
-protection_condition: '(' ':protection' (logical_atom | variable) ')';
-
 compound_task_atom	: '(' compound_task terms ')';
 primitive_task_atom	: '(' primitive_task terms ')'; //internal or common task
 
-task_list returns [Collection<TaskInvoker> _tasksPointers]:
+task_list returns [Collection<TaskInvoker> _tasksInvokers]:
     NIL                                 #task_list_A
     |task_atom                          #task_list_B
     |'(' ':unordered'? task_atom*')'	#task_list_C
     ;
 
-task_atom returns [TaskInvoker _taskPointer]: '(' ':immediate'? task terms ')';
+task_atom returns [TaskInvoker _taskInvoker]: '(' ':immediate'? task terms ')';
 
 task			: (primitive_task | compound_task);
 
@@ -63,7 +61,8 @@ sorted_pre		: '(' ':sort-by' variable (java_class|shop2_comparator) logical_expr
 logical_expression returns [LogicalPrecondition _precondition]:
 	expA=logical_expression 'and'? expB=logical_expression					#expAnd
 	| expA=logical_expression 'and'? '(' 'not' expB=logical_expression ')'	#expAndNot
-	| '(' logical_expression? ')'											#expVoid			
+	| '(' ')'																#expVoid
+	| '(' logical_expression ')'											#expSub			
 	| logical_atom															#expAtom
 	| task_atom																#expTaskAtom
 	;
@@ -71,22 +70,29 @@ logical_expression returns [LogicalPrecondition _precondition]:
 //simple_expression: logical_atom | task_atom;
 
 logical_atom returns [LogicalAtom _logicalAtom]: '(' predicate terms ')';
+	
+protection_condition:
+	'(' ':protection''(' predicate terms ')' ')'		#protectionConditionA
+	| '(' ':protection' term ')'						#protectionConditionB
+;
 
-terms returns [Collection<Term> _terms]: term*;
+terms returns [List<Term> _terms]: term*;
 
 term_list returns [List<Term> _termList]: '(' terms ')';
 
 list_head: '(' head=variable '.' list=variable ')';
 
 term returns [Term _term] :
-    NIL             #termA
-    | NUMBER        #termB
-    | SYMBOL        #termC
-    | variable      #termD
-    | call_term     #termE
-    | logical_atom  #termF
-    | list_head     #termG
-    | term_list     #termH;
+    NIL             		#termA
+    | NUMBER        		#termB
+    | SYMBOL        		#termC
+    | variable      		#termD
+    | call_term     		#termE
+    | logical_atom  		#termF
+    | list_head     		#termG
+    | term_list     		#termH
+    | protection_condition 	#termI
+    ;
 
 call_term : '(' 'call' (shop2_function | java_function) term+ ')';
 

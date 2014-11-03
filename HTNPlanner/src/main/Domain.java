@@ -45,5 +45,13 @@ public class Domain {
 		
 		return false;
 	}
+	
+	public static boolean invoke(String name, String... params) {
+		Variable[] variables = new Variable[params.length];
+		for (int i=0;i<params.length;i++)
+			variables[i] = new Variable("var"+Integer.toString(i),params[i]);
+		
+		return invoke(name,variables);
+	}
 
 }
