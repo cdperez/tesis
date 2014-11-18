@@ -7,6 +7,8 @@ import tasks.Binder;
 
 public abstract class Term {
 	
+	protected int benefit=0;
+	
 	public abstract boolean equals (Object obj);
 	
 	public void addToWorld(){};
@@ -37,5 +39,12 @@ public abstract class Term {
 
 	public void bind(Binder binder) {}
 	
+	public void setBenefit(int benefit){
+		this.benefit=benefit;
+	}
+	
+	public int getBenefit(){
+		return benefit;
+	};
 	
 }

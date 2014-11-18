@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import preferences.PreferencesManager;
 import tasks.TaskInvoker;
 import terms.LogicalAtom;
 import terms.Term;
@@ -15,11 +16,10 @@ import com.google.common.collect.HashMultimap;
 public class Problem {
 	
 	protected static String name = "";
-	//protected static HashMap<String, HashSet<LogicalAtom>> state = new HashMap<String, HashSet<LogicalAtom>>();
 	protected static HashMultimap<String,LogicalAtom> state = HashMultimap.create();
 	protected static List<TaskInvoker> goals = new LinkedList<>();
-	
 	protected static HashMap<LogicalAtom,Integer> protections = new HashMap<>();
+	protected static PreferencesManager preferencesManager = new PreferencesManager();
 	
 	public static void addState(LogicalAtom atom){
 		LogicalAtom la = atom.asConstant();
@@ -77,15 +77,15 @@ public class Problem {
 		return state.containsEntry(la.getName(), la.asConstant());
 	}
 	
-	public static LinkedList<LogicalAtom> getCandidates(LogicalAtom la){
-		LinkedList<LogicalAtom> result = new LinkedList<>();
+	public static List<LogicalAtom> getCandidates(LogicalAtom la){
+		List<LogicalAtom> candidates = new LinkedList<>();
 		
-		if (!state.containsKey(la.getName())) return result;
+		if (!state.containsKey(la.getName())) return candidates;
 		
 		for (LogicalAtom _la:state.get(la.getName()))
-			if (la.isCandidateOf(_la)) result.add(_la);
+			if (la.isCandidateOf(_la)) candidates.add(_la);
 				
-		return result;
+		return preferencesManager.sort(candidates);
 	}
 	
 	public static void addGoal(TaskInvoker task){

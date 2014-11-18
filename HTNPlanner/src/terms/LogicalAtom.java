@@ -200,4 +200,11 @@ public class LogicalAtom extends Term implements Iterable<Term>{
 		}
 	}
 	
+	public int getBenefit(){
+		int acumBenefit=benefit;
+		for (Term term:terms)
+			acumBenefit+=term.getBenefit();
+		return acumBenefit;
+	}
+	
 }

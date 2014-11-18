@@ -105,5 +105,8 @@ public class Variable extends Term{
 		value.bind(binder);
 	}
 	
-	
+	public int getBenefit(){
+		//TODO ver
+		return value.getBenefit();
+	}
 }
