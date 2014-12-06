@@ -148,7 +148,7 @@ public class Logistics {
 		 */
 		
 		System.out.println("!add-protection("+g.toString()+")");
-		plan.add("!add-protection("+g.toString()+")");
+//		plan.add("!add-protection("+g.toString()+")");
 		
 		Problem.addProtection(g);
 		return true;
@@ -164,7 +164,7 @@ public class Logistics {
 		 */
 		
 		System.out.println("!delete-protection("+g.toString()+")");
-		plan.add("!delete-protection("+g.toString()+")");
+//		plan.add("!delete-protection("+g.toString()+")");
 		
 		Problem.delProtection(g);
 		return true;

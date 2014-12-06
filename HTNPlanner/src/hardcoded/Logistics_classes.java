@@ -79,7 +79,7 @@ public class Logistics_classes {
 	}
 	
 	private static void loadProblem() throws IOException{
-		String problemFile = "./problems/logistics/ipc2002/probLOGISTICS-30-1/problem";
+		String problemFile = "./problems/logistics/ipc2002/probLOGISTICS-30-0/problem";
 	    
 	    JSHOP2Lexer problemLexer = new JSHOP2Lexer(new ANTLRFileStream(problemFile));
 	    CommonTokenStream problemTokens = new CommonTokenStream(problemLexer);

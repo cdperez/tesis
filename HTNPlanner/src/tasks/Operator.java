@@ -40,7 +40,9 @@ public class Operator extends Task{
 		for (Term la:delList) la.delFromWorld();
 		for (Term la:addList) la.addToWorld();
 		
-		Plan.add(this);
+		if (!this.name.contains("protection"))
+			Plan.add(this);
+		
 		return true;
 	}
 	

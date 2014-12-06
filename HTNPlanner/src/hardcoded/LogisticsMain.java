@@ -21,7 +21,7 @@ public class LogisticsMain {
 	public static void main(String[] args) throws Exception
 	  {
 		
-		JSHOP2Parser problem = getParser("ipc2002/probLOGISTICS-30-1/problem");
+		JSHOP2Parser problem = getParser("ipc2002/probLOGISTICS-30-0/problem");
 		
 		
 		long tiempo = System.currentTimeMillis();
